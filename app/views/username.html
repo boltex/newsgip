@@ -1,0 +1,47 @@
+<div class="header">
+  <ul class="nav nav-pills pull-right">
+    <li class="active"><a>Login</a></li>
+  </ul>
+  <h3 class="text-muted">SGIP</h3>
+</div>
+
+
+<form name="signupUsername" novalidate  role="form" ng-submit="signupUsername.$valid && processLogin()">
+
+  <div class="form-group" ng-class="{ 'has-error' : errorName || (signupUsername.inputUsername.$invalid && signupUsername.inputUsername.$dirty)}">
+    <label for="InputUser">User {{ message }}</label>
+    <input type="text" required
+        ng-minlength=5
+        ng-maxlength=20  
+        class="form-control" 
+        name="inputUsername" 
+        placeholder="username" 
+        ng-model="formData.username" />
+  </div>
+  
+  <button ng-disabled="signupUsername.$invalid" type="submit" class="btn btn-success btn-lg btn-block">
+	<span class="glyphicon glyphicon-flash"></span> Enter User Name
+  </button>
+
+
+<div class="form-group" ng-class="{ 'has-error' : errorName || (signupUsername.inputUsername.$invalid && signupUsername.inputUsername.$dirty)}">
+ 
+ <span class="help-block span-inline" ng-show="errorName">{{ errorName }}</span>
+
+ <span class="help-block span-inline" 
+        ng-show="signupUsername.inputUsername.$dirty && signupUsername.inputUsername.$invalid">
+    <span class="help-block span-inline"
+        ng-show="signupUsername.inputUsername.$error.required">
+        User name is required.
+    </span>
+    <span class="help-block span-inline" 
+            ng-show="signupUsername.inputUsername.$error.minlength">
+            Your name is required to be at least 5 characters
+    </span>
+    <span class="help-block span-inline"
+            ng-show="signupUsername.inputUsername.$error.maxlength">
+            Your name cannot be longer than 20 characters
+    </span>
+</span>
+</div>
+</form>
