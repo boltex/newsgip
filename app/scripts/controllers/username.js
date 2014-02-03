@@ -7,7 +7,6 @@ angular.module('newsgipApp')
         // create a blank object to hold our form information
 	    // $scope will allow this to pass between controller and view
         $scope.formData = {};
-        $scope.inlogin = true;
 
         $scope.objectValue = sharedProperties.getProperty();
 

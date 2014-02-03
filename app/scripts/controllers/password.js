@@ -10,7 +10,6 @@ angular.module('newsgipApp')
 
         $scope.objectValue = sharedProperties.getProperty();
 
-
         $scope.processPassword = function() {
             
             //------------------------------------------MAKE PASSWORD HASH

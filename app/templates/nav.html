@@ -1,0 +1,59 @@
+
+
+<div class="container-fluid" ng-controller="mainCtrl">
+
+<div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#sgip-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand">SGIP</a>
+</div>
+
+
+<div class="collapse navbar-collapse" id="sgip-collapse">
+
+<ul class="nav navbar-nav">
+       
+        <li class="dropdown">
+          <a href="" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="">Action</a></li>
+            <li><a href="">Another action</a></li>
+            <li><a href="">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="">Separated link</a></li>
+            <li class="divider"></li>
+            <li><a href="">One more separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+
+
+  <ul class="nav navbar-nav pull-right">
+  
+    <li ng-Class="{active: isActive('/login'), disabled: isActive('/monitor')||isActive('/manage')}">
+    <a ng-hide="isActive('/monitor')||isActive('/manage')">Login</a>
+    <a ng-show="isActive('/monitor')||isActive('/manage')">Login</a>
+    </li>
+    <li ng-Class="{active: isActive('/monitor'), disabled: !isActive('/monitor')&&!isActive('/manage') }" >
+    <a ng-hide="!isActive('/monitor')&&!isActive('/manage')" ng-href="/#/monitor" >Monitor</a>
+    <a ng-show="!isActive('/monitor')&&!isActive('/manage')">Monitor</a>
+    </li>
+    <li ng-Class="{active: isActive('/manage'), disabled: !isActive('/monitor')&&!isActive('/manage')}">
+    <a ng-hide=" !isActive('/monitor')&&!isActive('/manage')" ng-href="/#/manage" >Manage</a>
+    <a ng-show=" !isActive('/monitor')&&!isActive('/manage')">Manage</a>
+    </li>
+    <li ng-Class="{disabled: !isActive('/monitor')&&!isActive('/manage')}" >
+    <a ng-hide="!isActive('/monitor')&&!isActive('/manage')" ng-href="/#/logout" >Logout</a>
+    <a ng-show="!isActive('/monitor')&&!isActive('/manage')" >Logout</a>
+    </li>
+    
+  </ul>
+</div>
+  
+  
+ 
+</div>

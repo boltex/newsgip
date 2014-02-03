@@ -9,6 +9,9 @@ angular.module('newsgipApp', [
   .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
       .when('/', {
+        redirectTo: '/login'
+      })
+      .when('/login', {
         templateUrl: 'views/username.html',
         controller: 'usernameCtrl'
       })

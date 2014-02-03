@@ -1,4 +1,4 @@
-/*global $:false */
+/* //global $:false */
 'use strict';
 
 angular.module('newsgipApp')

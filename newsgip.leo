@@ -21,9 +21,14 @@
 <v t="fil.20140130182742"><vh>@nosent app/views/main.html</vh></v>
 </v>
 </v>
+<v t="fil.20140201161000.1996"><vh>Snippets</vh></v>
 <v t="fil.20140130191413" a="E"><vh>@nosent app/index.html</vh>
 <v t="fil.20140130191413.1"><vh>Head</vh></v>
 <v t="fil.20140130191413.2"><vh>Body</vh></v>
+</v>
+<v t="fil.20140201161000.1992" a="E"><vh>templates</vh>
+<v t="fil.20140201161000.1993"><vh>@nosent app/templates/nav.html</vh></v>
+<v t="fil.20140201161000.1995"><vh>@nosent app/templates/footer.html</vh></v>
 </v>
 <v t="fil.20140131183952.1676" a="E"><vh>views</vh>
 <v t="fil.20140130234745"><vh>@nosent app/views/username.html</vh></v>
@@ -34,13 +39,14 @@
 </v>
 <v t="fil.20140131014254"><vh>@nosent app/scripts/app.js</vh></v>
 <v t="fil.20140131183952.1677" a="E"><vh>Controlers</vh>
+<v t="fil.20140201161000.1991"><vh>@nosent app/scripts/controllers/main.js</vh></v>
 <v t="fil.20140130234827"><vh>@nosent app/scripts/controllers/username.js</vh></v>
 <v t="fil.20140130234827.1"><vh>@nosent app/scripts/controllers/password.js</vh></v>
 <v t="fil.20140201161000.1980"><vh>@nosent app/scripts/controllers/monitor.js</vh></v>
 <v t="fil.20140201161000.1986"><vh>@nosent app/scripts/controllers/manage.js</vh></v>
 <v t="fil.20140201161000.1984"><vh>@nosent app/scripts/controllers/logout.js</vh></v>
 </v>
-<v t="fil.20140131183952.1678" a="E"><vh>PHP Backend</vh>
+<v t="fil.20140131183952.1678"><vh>PHP Backend</vh>
 <v t="fil.20140130234753"><vh>@nosent app/api/username.php</vh></v>
 <v t="fil.20140130234759"><vh>@nosent app/api/password.php</vh></v>
 <v t="fil.20140201161000.1977"><vh>@nosent app/api/monitor.php</vh></v>
@@ -194,7 +200,7 @@ phpinfo();
         &lt;link rel="stylesheet" href="styles/main.css"&gt;
         &lt;!-- endbuild --&gt;
 &lt;/head&gt;</t>
-<t tx="fil.20140130191413.2">&lt;body ng-app="newsgipApp"&gt;
+<t tx="fil.20140130191413.2">&lt;body ng-app="newsgipApp" &gt;
     &lt;!--[if lt IE 7]&gt;
       &lt;p class="browsehappy"&gt;You are using an &lt;strong&gt;outdated&lt;/strong&gt; browser. Please &lt;a href="http://browsehappy.com/"&gt;upgrade your browser&lt;/a&gt; to improve your experience.&lt;/p&gt;
     &lt;![endif]--&gt;
@@ -205,7 +211,11 @@ phpinfo();
     &lt;![endif]--&gt;
 
     &lt;!-- Add your site or application content here --&gt;
+    &lt;div id="wrap"  &gt;
+    &lt;header ng-include="'templates/nav.html'" class="navbar navbar-default navbar-static-top" role="navigation"&gt;&lt;/header&gt;
     &lt;div class="container" ng-view=""&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;footer class="footer" ng-include="'templates/footer.html'"&gt;&lt;/footer&gt;
 
     &lt;!-- Google Analytics: change UA-XXXXX-X to be your site's ID --&gt;
      &lt;script&gt;
@@ -246,6 +256,7 @@ phpinfo();
 
         &lt;!-- build:js({.tmp,app}) scripts/scripts.js --&gt;
         &lt;script src="scripts/app.js"&gt;&lt;/script&gt;
+        &lt;script src="scripts/controllers/main.js"&gt;&lt;/script&gt;
         &lt;script src="scripts/controllers/username.js"&gt;&lt;/script&gt;
         &lt;script src="scripts/controllers/password.js"&gt;&lt;/script&gt;
         &lt;script src="scripts/controllers/monitor.js"&gt;&lt;/script&gt;
@@ -254,11 +265,9 @@ phpinfo();
         &lt;!-- endbuild --&gt;
 &lt;/body&gt;</t>
 <t tx="fil.20140130233414">@language html
-&lt;div class="header"&gt;
-  &lt;ul class="nav nav-pills pull-right"&gt;
-    &lt;li class="active"&gt;&lt;a&gt;Login&lt;/a&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-  &lt;h3 class="text-muted"&gt;SGIP&lt;/h3&gt;
+&lt;div class="jumbotron"&gt;
+  &lt;h1&gt;SGIP &lt;span class="glyphicon glyphicon-eye-open"&gt;&lt;/span&gt;&lt;/h1&gt;
+  &lt;p&gt;Reporting software for visual site monitoring&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;!-- SHOW ERROR/SUCCESS MESSAGES --&gt;
@@ -267,7 +276,7 @@ phpinfo();
 
   &lt;div class="form-group" ng-class="{ 'has-error' : errorPassword }"&gt;
     &lt;label for="InputPassword"&gt;Password {{ message }}&lt;/label&gt;
-    &lt;input type="password" required 
+    &lt;input type="password" required autofocus
         ng-minlength=5 
         ng-maxlength=20 
         class="form-control" 
@@ -307,19 +316,16 @@ phpinfo();
 
 </t>
 <t tx="fil.20140130234745">@language html
-&lt;div class="header"&gt;
-  &lt;ul class="nav nav-pills pull-right"&gt;
-    &lt;li class="active"&gt;&lt;a&gt;Login&lt;/a&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-  &lt;h3 class="text-muted"&gt;SGIP&lt;/h3&gt;
+&lt;div class="jumbotron"&gt;
+  &lt;h1&gt;SGIP &lt;span class="glyphicon glyphicon-eye-open"&gt;&lt;/span&gt;&lt;/h1&gt;
+  &lt;p&gt;Reporting software for visual site monitoring&lt;/p&gt;
 &lt;/div&gt;
-
 
 &lt;form name="signupUsername" novalidate  role="form" ng-submit="signupUsername.$valid &amp;&amp; processLogin()"&gt;
 
   &lt;div class="form-group" ng-class="{ 'has-error' : errorName || (signupUsername.inputUsername.$invalid &amp;&amp; signupUsername.inputUsername.$dirty)}"&gt;
     &lt;label for="InputUser"&gt;User {{ message }}&lt;/label&gt;
-    &lt;input type="text" required
+    &lt;input type="text" required autofocus
         ng-minlength=5
         ng-maxlength=20  
         class="form-control" 
@@ -528,7 +534,6 @@ angular.module('newsgipApp')
         // create a blank object to hold our form information
 	    // $scope will allow this to pass between controller and view
         $scope.formData = {};
-        $scope.inlogin = true;
 
         $scope.objectValue = sharedProperties.getProperty();
 
@@ -575,7 +580,6 @@ angular.module('newsgipApp')
         $scope.sendPass = {};
 
         $scope.objectValue = sharedProperties.getProperty();
-
 
         $scope.processPassword = function() {
             
@@ -635,6 +639,9 @@ angular.module('newsgipApp', [
   .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
       .when('/', {
+        redirectTo: '/login'
+      })
+      .when('/login', {
         templateUrl: 'views/username.html',
         controller: 'usernameCtrl'
       })
@@ -683,10 +690,20 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
     padding: 0.2em 0;
 }
 
-/* Space out content a bit */
+html,
 body {
-    padding-top: 20px;
-    padding-bottom: 20px;
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto;
+  /* Negative indent footer by its height */
+  margin: 0 auto -60px;
+  /* Pad bottom by footer height */
+  padding: 0 0 60px;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -712,10 +729,11 @@ body {
 
 /* Custom page footer */
 .footer {
-    padding-top: 19px;
-    color: #777;
-    border-top: 1px solid #e5e5e5;
+    /*border-top: 1px solid #e5e5e5;*/
+    height: 60px;
+    background-color: #f5f5f5;
 }
+
 
 .container-narrow &gt; hr {
     margin: 30px 0;
@@ -746,40 +764,19 @@ display:inline;
 margin-right:40px;
 }
 
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-    .container {
-        max-width: 730px;
-    }
+.container .text-muted {
+  margin: 20px 0;
+}
 
-    /* Remove the padding we set earlier */
-    .header,
-    .marketing,
-    .footer {
-        padding-left: 0;
-        padding-right: 0;
-    }
-    /* Space out the masthead */
-    .header {
-        margin-bottom: 30px;
-    }
-    /* Remove the bottom border on the jumbotron for visual effect */
-    .jumbotron {
-        border-bottom: 0;
-    }
+.footer &gt; .container {
+  padding-left: 15px;
+  padding-right: 15px;
 }
 </t>
 <t tx="fil.20140131183952.1676"></t>
 <t tx="fil.20140131183952.1677"></t>
 <t tx="fil.20140131183952.1678"></t>
-<t tx="fil.20140201161000.1976">&lt;div class="header"&gt;
-  &lt;ul class="nav nav-pills pull-right"&gt;
-    &lt;li&gt;&lt;a ng-href="/#/monitor"&gt;Monitor&lt;/a&gt;&lt;/li&gt;
-    &lt;li class="active"&gt;&lt;a&gt;Manage&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a ng-href="/#/logout"&gt;Logout&lt;/a&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-  &lt;h3 class="text-muted"&gt;SGIP&lt;/h3&gt;
-&lt;/div&gt;</t>
+<t tx="fil.20140201161000.1976">manage html file content</t>
 <t tx="fil.20140201161000.1977">@language php
 &lt;?php
 
@@ -789,15 +786,7 @@ margin-right:40px;
 
 
 ?&gt;</t>
-<t tx="fil.20140201161000.1979">&lt;div class="header"&gt;
-  &lt;ul class="nav nav-pills pull-right"&gt;
-    &lt;li class="active"&gt;&lt;a&gt;Monitor&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a ng-href="/#/manage"&gt;Manage&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a ng-href="/#/logout"&gt;Logout&lt;/a&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-  &lt;h3 class="text-muted"&gt;SGIP&lt;/h3&gt;
-
-
+<t tx="fil.20140201161000.1979">
 &lt;ul class="nav nav-pills"&gt;
 
   &lt;li class="dropdown"&gt;
@@ -810,12 +799,9 @@ margin-right:40px;
     &lt;/ul&gt;
   &lt;/li&gt;
 
-&lt;/ul&gt;
-
-
-&lt;/div&gt;</t>
+&lt;/ul&gt;</t>
 <t tx="fil.20140201161000.1980">@language javascript
-/*global $:false */
+/* //global $:false */
 'use strict';
 
 angular.module('newsgipApp')
@@ -824,14 +810,7 @@ angular.module('newsgipApp')
         $scope.objectValue = sharedProperties.getProperty();
 
       }]);</t>
-<t tx="fil.20140201161000.1982">&lt;div class="header"&gt;
-  &lt;ul class="nav nav-pills pull-right"&gt;
-    &lt;li class="disabled"&gt;&lt;a&gt;Monitor&lt;/a&gt;&lt;/li&gt;
-    &lt;li class="disabled"&gt;&lt;a&gt;Manage&lt;/a&gt;&lt;/li&gt;
-    &lt;li class="active"&gt;&lt;a&gt;Logout&lt;/a&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-  &lt;h3 class="text-muted"&gt;SGIP&lt;/h3&gt;
-&lt;/div&gt;
+<t tx="fil.20140201161000.1982">
 
 &lt;div class="jumbotron"&gt;
   &lt;h1&gt;SGIP&lt;/h1&gt;
@@ -873,7 +852,7 @@ angular.module('newsgipApp')
 
       }]);</t>
 <t tx="fil.20140201161000.1986">@language javascript
-/*global $:false */
+/* //global $:false */
 'use strict';
 
 angular.module('newsgipApp')
@@ -903,5 +882,119 @@ echo json_encode($data);
 
 
 ?&gt;</t>
+<t tx="fil.20140201161000.1991">@language javascript
+/* //global $:false */
+'use strict';
+
+angular.module('newsgipApp')
+    .controller('mainCtrl', ['$scope', '$location', function ($scope, $location) {
+
+        $scope.isActive = function(path) {
+            if ($location.path().substr(0, path.length) === path) {
+              return true;
+            } else {
+              return false;
+            }
+          };
+
+
+      }]);
+    
+    
+</t>
+<t tx="fil.20140201161000.1992"></t>
+<t tx="fil.20140201161000.1993">
+
+&lt;div class="container-fluid" ng-controller="mainCtrl"&gt;
+
+&lt;div class="navbar-header"&gt;
+      &lt;button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#sgip-collapse"&gt;
+        &lt;span class="sr-only"&gt;Toggle navigation&lt;/span&gt;
+        &lt;span class="icon-bar"&gt;&lt;/span&gt;
+        &lt;span class="icon-bar"&gt;&lt;/span&gt;
+        &lt;span class="icon-bar"&gt;&lt;/span&gt;
+      &lt;/button&gt;
+      &lt;a class="navbar-brand"&gt;SGIP&lt;/a&gt;
+&lt;/div&gt;
+
+
+&lt;div class="collapse navbar-collapse" id="sgip-collapse"&gt;
+
+&lt;ul class="nav navbar-nav"&gt;
+       
+        &lt;li class="dropdown"&gt;
+          &lt;a href="" class="dropdown-toggle" data-toggle="dropdown"&gt;Dropdown &lt;b class="caret"&gt;&lt;/b&gt;&lt;/a&gt;
+          &lt;ul class="dropdown-menu"&gt;
+            &lt;li&gt;&lt;a href=""&gt;Action&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=""&gt;Another action&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=""&gt;Something else here&lt;/a&gt;&lt;/li&gt;
+            &lt;li class="divider"&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=""&gt;Separated link&lt;/a&gt;&lt;/li&gt;
+            &lt;li class="divider"&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=""&gt;One more separated link&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+
+
+  &lt;ul class="nav navbar-nav pull-right"&gt;
+  
+    &lt;li ng-Class="{active: isActive('/login'), disabled: isActive('/monitor')||isActive('/manage')}"&gt;
+    &lt;a ng-hide="isActive('/monitor')||isActive('/manage')"&gt;Login&lt;/a&gt;
+    &lt;a ng-show="isActive('/monitor')||isActive('/manage')"&gt;Login&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li ng-Class="{active: isActive('/monitor'), disabled: !isActive('/monitor')&amp;&amp;!isActive('/manage') }" &gt;
+    &lt;a ng-hide="!isActive('/monitor')&amp;&amp;!isActive('/manage')" ng-href="/#/monitor" &gt;Monitor&lt;/a&gt;
+    &lt;a ng-show="!isActive('/monitor')&amp;&amp;!isActive('/manage')"&gt;Monitor&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li ng-Class="{active: isActive('/manage'), disabled: !isActive('/monitor')&amp;&amp;!isActive('/manage')}"&gt;
+    &lt;a ng-hide=" !isActive('/monitor')&amp;&amp;!isActive('/manage')" ng-href="/#/manage" &gt;Manage&lt;/a&gt;
+    &lt;a ng-show=" !isActive('/monitor')&amp;&amp;!isActive('/manage')"&gt;Manage&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li ng-Class="{disabled: !isActive('/monitor')&amp;&amp;!isActive('/manage')}" &gt;
+    &lt;a ng-hide="!isActive('/monitor')&amp;&amp;!isActive('/manage')" ng-href="/#/logout" &gt;Logout&lt;/a&gt;
+    &lt;a ng-show="!isActive('/monitor')&amp;&amp;!isActive('/manage')" &gt;Logout&lt;/a&gt;
+    &lt;/li&gt;
+    
+  &lt;/ul&gt;
+&lt;/div&gt;
+  
+  
+ 
+&lt;/div&gt;
+</t>
+<t tx="fil.20140201161000.1995">      &lt;div class="container"&gt;
+        &lt;p class="text-muted"&gt;Felix Workshop 2014&lt;/p&gt;
+      &lt;/div&gt;</t>
+<t tx="fil.20140201161000.1996">@language css
+
+REMOVED FROM MAIN.CSS
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+    .container {
+        max-width: 730px;
+    }
+
+    /* Remove the padding we set earlier */
+    .header,
+    .marketing,
+    .footer {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    /* Space out the masthead */
+    .header {
+        margin-bottom: 30px;
+    }
+    /* Remove the bottom border on the jumbotron for visual effect */
+    .jumbotron {
+        border-bottom: 0;
+    }
+}
+
+@language html
+
+</t>
 </tnodes>
 </leo_file>
