@@ -14,7 +14,7 @@ angular.module('newsgipApp')
             $scope.errorName = null;
             $http({
                 method: 'POST',
-                url: '/api/username.php',
+                url: 'api/username.php',
                 data: $.param($scope.formData),
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
               }).

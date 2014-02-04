@@ -39,15 +39,15 @@
     <a ng-show="isActive('/monitor')||isActive('/manage')">Login</a>
     </li>
     <li ng-Class="{active: isActive('/monitor'), disabled: !isActive('/monitor')&&!isActive('/manage') }" >
-    <a ng-hide="!isActive('/monitor')&&!isActive('/manage')" ng-href="/#/monitor" >Monitor</a>
+    <a ng-hide="!isActive('/monitor')&&!isActive('/manage')" ng-href="./#/monitor" >Monitor</a>
     <a ng-show="!isActive('/monitor')&&!isActive('/manage')">Monitor</a>
     </li>
     <li ng-Class="{active: isActive('/manage'), disabled: !isActive('/monitor')&&!isActive('/manage')}">
-    <a ng-hide=" !isActive('/monitor')&&!isActive('/manage')" ng-href="/#/manage" >Manage</a>
+    <a ng-hide=" !isActive('/monitor')&&!isActive('/manage')" ng-href="./#/manage" >Manage</a>
     <a ng-show=" !isActive('/monitor')&&!isActive('/manage')">Manage</a>
     </li>
     <li ng-Class="{disabled: !isActive('/monitor')&&!isActive('/manage')}" >
-    <a ng-hide="!isActive('/monitor')&&!isActive('/manage')" ng-href="/#/logout" >Logout</a>
+    <a ng-hide="!isActive('/monitor')&&!isActive('/manage')" ng-href="./#/logout" >Logout</a>
     <a ng-show="!isActive('/monitor')&&!isActive('/manage')" >Logout</a>
     </li>
     

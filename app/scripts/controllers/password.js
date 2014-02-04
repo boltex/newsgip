@@ -30,7 +30,7 @@ angular.module('newsgipApp')
 
             $http({
                 method: 'POST',
-                url: '/api/password.php',
+                url: 'api/password.php',
                 data: $.param($scope.sendPass),
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
               }).

@@ -14,6 +14,7 @@
         <!-- build:css({.tmp,app}) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
+    <!-- <base href="/newsgip/index.html" /> -->
 </head>
 <body ng-app="newsgipApp" >
     <!--[if lt IE 7]>
@@ -27,10 +28,10 @@
 
     <!-- Add your site or application content here -->
     <div id="wrap"  >
-    <header ng-include="'templates/nav.html'" class="navbar navbar-default navbar-static-top" role="navigation"></header>
+    <header ng-include="'views/nav.html'" class="navbar navbar-default navbar-static-top" role="navigation"></header>
     <div class="container" ng-view=""></div>
     </div>
-    <footer class="footer" ng-include="'templates/footer.html'"></footer>
+    <footer class="footer" ng-include="'views/footer.html'"></footer>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -44,7 +45,7 @@
     </script>
 
     <script src="bower_components/jquery/jquery.js"></script>
-    <script src="scripts/vendor/jquery.md5.js"></script>
+    <script src="scripts/jquery.md5.js"></script>
     <script src="bower_components/angular/angular.js"></script>
 
         <!-- build:js scripts/plugins.js -->
