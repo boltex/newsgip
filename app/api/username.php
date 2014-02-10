@@ -43,7 +43,9 @@ if (empty($_POST['username'])){
         $_SESSION["islogged"]="0";
         $tableau = mysql_fetch_array($opexists);
         $oppasskey = $tableau['OperatorPasswordKey'];
+        $_SESSION["oppasskey"]= $oppasskey;
         $_SESSION["userindex"]= $tableau['OperatorIndex'];
+
     }
 }
 
@@ -58,7 +60,7 @@ if (empty($_POST['username'])){
 		// if there are no errors, return a message
 		$data['success'] = true;
 		$data['message'] = 'exists';
-          $data['passkey'] = $oppasskey;
+        $data['passkey'] = $oppasskey;
         
 	}
 	// return all our data to an AJAX call

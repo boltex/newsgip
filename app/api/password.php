@@ -15,8 +15,9 @@ $data 		= array(); 		// array to pass back data
     if (empty($_POST['jskey']) || !is_numeric($_POST['jskey']) )
 	   $errors['jskey'] = 'jskey is required.';
 
-    if (!isset($_SESSION['username']))
-        $errors['username'] = 'Cookies must be enabled.';
+    if (!isset($_SESSION['username']))  
+        $errors['username'] = 'Cookies must be enabled.';  
+
 
 // if no errors so far ... 
 if ( empty($errors)) {

@@ -1,14 +1,48 @@
 
-<ul class="nav nav-pills">
 
-  <li class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-      Choose Site: <span class="caret"></span>
-    </a>
-    <ul class="dropdown-menu">
-        <li ng-repeat="site in sites"><a>{{ site }}</a></li>
+<div class="container">
 
-    </ul>
-  </li>
+  <div class="row">
+    <div id="currentlogged" class="col-xs-12 col-sm-4 col-md-4 ">
+      <div class="well well-sm"> Logged as {{loggedAsUser}} </div>
+    </div>
 
-</ul>
+    <div id="currentdate" class="col-xs-12 col-sm-4 col-md-4 " >
+     <div class="well well-sm"> {{datetime}}</div>
+    </div>
+
+    <div id="currentsite" class="col-xs-12 col-sm-4 col-md-4 " >
+      <ul class="nav nav-pills">
+        <li class="dropdown">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" >
+            Choose Site longer text: <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+              <li ng-repeat="site in sites"><a>{{ site }}</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+<div class="row">
+  <div id="birdseye" class="col-xs-12 col-sm-6 col-md-6">img</div>
+  <div id="procedures" class="col-xs-12 col-sm-6 col-md-6">proc</div>  
+  </div>
+</div>
+
+
+	<input type="text" ng-model="term"><br />
+  <table class="table table-striped table-bordered">
+  	<thead>
+  		<td>first</td>
+  		<td>last</td>
+  		<td>city</td>
+	</thead>
+<tbody>
+	<tr ng-repeat="user in users | filter:term">
+	<td>{{user.fname}}</td><td>{{user.lname}}</td><td>{{user.city}}</td>
+	</tr>
+</tbody>
+  </table>
+</div>

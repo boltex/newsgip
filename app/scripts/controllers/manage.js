@@ -2,8 +2,8 @@
 'use strict';
 
 angular.module('newsgipApp')
-    .controller('manageCtrl', ['$scope', '$http', '$location', 'sharedProperties', function ($scope, $http, $location, sharedProperties) {
+    .controller('manageCtrl', ['$scope', '$http', '$location',  function ($scope, $http, $location) {
 
-        $scope.objectValue = sharedProperties.getProperty();
+       
 
-      }]);
+}]);

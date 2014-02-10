@@ -333,7 +333,7 @@ module.exports = function (grunt) {
             'api/{,*/}*.*',
             '*.{ico,png,txt}',
             '.htaccess',
-            'bower_components/**/*',
+            //'bower_components/**/*',
             'images/{,*/}*.{webp}',
             'fonts/*'
           ]

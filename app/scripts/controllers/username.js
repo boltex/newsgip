@@ -2,13 +2,12 @@
 'use strict';
 
 angular.module('newsgipApp')
-    .controller('usernameCtrl', ['$scope', '$http', '$location', 'sharedProperties', function ($scope, $http, $location, sharedProperties) {
+    .controller('usernameCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
 
         // create a blank object to hold our form information
 	    // $scope will allow this to pass between controller and view
         $scope.formData = {};
 
-        $scope.objectValue = sharedProperties.getProperty();
 
         $scope.processLogin = function() {
             $scope.errorName = null;
@@ -25,7 +24,7 @@ angular.module('newsgipApp')
                 } else {
                   // SUCCESS !!
                   $scope.message = data.message;
-                  $scope.objectValue.datapasskey = data.passkey;
+                  
                   $location.path('/password');
                 }
 

@@ -34,16 +34,16 @@ angular.module('newsgipApp', [
       .otherwise({
         redirectTo: '/'
       });
-  }])
-  .service('sharedProperties', function () {
-    var property = { data: 'temp' };
-    return {
-        getProperty: function () {
-            return property;
-          },
-        setProperty: function(value) {
-            property = value;
-          }
-      };
-  });
+  }]).controller('mainCtrl', ['$scope', '$location', function ($scope, $location) {
+
+        $scope.isActive = function(path) {
+            if ($location.path().substr(0, path.length) === path) {
+              return true;
+            } else {
+              return false;
+            }
+          };
+
+
+      }]);
 

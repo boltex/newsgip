@@ -2,11 +2,11 @@
 'use strict';
 
 angular.module('newsgipApp')
-    .controller('logoutCtrl', ['$scope', '$http', '$location', 'sharedProperties', function ($scope, $http, $location, sharedProperties) {
+    .controller('logoutCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
 
         $http({
             method: 'POST',
-            url: '/api/logout.php',
+            url: './api/logout.php',
             data: $.param(''),
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
           }).
@@ -24,9 +24,5 @@ angular.module('newsgipApp')
         error(function (data) {
             $scope.error = data.description || 'Server is unreachable';
           });
-        
-
-
-        $scope.objectValue = sharedProperties.getProperty();
-
+      
       }]);
