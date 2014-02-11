@@ -15,13 +15,26 @@ angular.module('newsgipApp')
     .controller('monitorCtrl', ['$scope', '$http', '$location',  function ($scope, $http, $location ) {
 
         //$scope.objectValue = sharedProperties.getProperty();
-
+        /*
         $http.jsonp('http://filltext.com/?rows=30&fname={firstName}&lname={lastName}&city={city}&callback=JSON_CALLBACK')
         .success(function(data){
             $scope.users=data;
           });
-
-        $scope.sites = ['site1', 'site2', 'site3' , 'site4'];
+        */
+        $http({
+            method: 'POST',
+            url: 'api/premonitor.php',
+            data: {},
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+          })
+        .success(function(data){
+            $scope.sites=data.sites;
+          });
+       
+        $scope.clicksite = function(param){
+            $scope.currentsite = param.SiteName;
+          };
+        //$scope.sites = ['site1', 'site2', 'site3' , 'site4'];
 
         //$scope.loggedAsUser = $scope.objectValue.loggedAsUser;
         $scope.datetime =formatAMPM();

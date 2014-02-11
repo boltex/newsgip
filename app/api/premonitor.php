@@ -39,7 +39,48 @@ if ( empty($errors)) {
         $errors['mysql'] = 'Error mysql_select_db';
     }
 }
+//-----------------------------------------------------------
+ $numofsites=0;
+    $allsites=array();
+    // get all sites
+    $siteexists=mysql_query("SELECT SiteIndex, SiteName, SiteMapUrl  FROM SitesTable ");
+    $numofsites = mysql_num_rows($siteexists); 
 
+    if($numofsites>0){ 
+        while( $anentry= mysql_fetch_assoc($siteexists )   ){
+            $r[]=$anentry;
+        }
+    }else{
+        $r = array(
+        "SiteIndex" => "0",
+        "SiteName" => "none",
+        "SiteMapUrl" => "defaultimage.jpg"
+         );
+    }
+
+    //while($r[]=mysql_fetch_array($siteexists)); //$r now contains whole array
+
+
+
+
+$errors = array();      // array to hold validation errors
+$data       = array();      // array to pass back data
+
+// return a response : if success give $oppasskey  ============================
+    // response if there are errors
+    if ( ! empty($errors)) {
+        //$data['mainmessage'] = $_POST;
+        // if there are items in our errors array, return those errors
+        $data['success'] = false;
+        $data['errors']  = $errors;
+    } else {
+        // if there are no errors, return a message
+        $data['success'] = true;
+        $data['sites'] = $r;
+        
+    }
+    // return all our data to an AJAX call
+    echo json_encode($data);
 
 
 
