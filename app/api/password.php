@@ -76,8 +76,9 @@ if ( empty($errors)) {
         $updatesuccess=mysql_query("UPDATE OperatorTable SET OperatorLastSalt='$jskey' WHERE OperatorName='$username'");
         $_SESSION["islogged"]="1";
         $_SESSION["isadmin"]=$opisadmin ;
-        $_SESSION['tablepastpage']=1;
         $_SESSION['managingsite']=0;
+        $_SESSION['tablepastpage']=1;
+        $_SESSION['rowsperpage']=5;
 }
 	// response if there are errors
 	if ( ! empty($errors)) {

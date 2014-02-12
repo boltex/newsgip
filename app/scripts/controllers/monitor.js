@@ -1,4 +1,4 @@
-/* //global $:false */
+/*global $:false */
 'use strict';
 
 function formatAMPM() {
@@ -28,11 +28,47 @@ angular.module('newsgipApp')
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
           })
         .success(function(data){
-            $scope.sites=data.sites;
+            if (!data.success) {
+              // Responded ERROR
+              $scope.message = data.errors;
+              
+            } else {
+              // SUCCESS !!
+              $scope.sites=data.sites;
+            }
+
+            
           });
        
         $scope.clicksite = function(param){
             $scope.currentsite = param.SiteName;
+            $http({
+                method: 'POST',
+                url: 'api/monitor.php',
+                data: $.param(param),
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+              })
+            .success(function(data){
+                console.log(data);
+                //$scope.eventpast=data.eventpast;
+                //$scope.siteproc= data.siteproc;
+              });
+
+/*  DOCUMENTATION FROM PHP
+$tablepastquery="
+SELECT `EventIndex` , `EventStart` , `EventEntered`, `EventLicense` , `Desc` , `Action` , `CameraName`
+FROM `EventTable` , `DescTable` , `ActionTable` , `CameraTable`
+WHERE `EventTable`.`EventDescription` = `DescTable`.`DescIndex`
+AND `EventTable`.`EventAction` = `ActionTable`.`ActionIndex`
+AND `EventTable`.`EventCamera` = `CameraTable`.`CameraIndex`
+AND `EventSite` = '$currentsite' ORDER BY `EventStart` DESC 
+LIMIT $startingpage , $GLOBALS[rowsperpage]
+"; 
+ */
+
+
+
+
           };
         //$scope.sites = ['site1', 'site2', 'site3' , 'site4'];
 

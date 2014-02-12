@@ -39,6 +39,8 @@ if ( empty($errors)) {
         $errors['mysql'] = 'Error mysql_select_db';
     }
 }
+
+if ($_SESSION['managingsite']==0){
 //-----------------------------------------------------------
  $numofsites=0;
     $allsites=array();
@@ -61,11 +63,6 @@ if ( empty($errors)) {
     //while($r[]=mysql_fetch_array($siteexists)); //$r now contains whole array
 
 
-
-
-$errors = array();      // array to hold validation errors
-$data       = array();      // array to pass back data
-
 // return a response : if success give $oppasskey  ============================
     // response if there are errors
     if ( ! empty($errors)) {
@@ -81,7 +78,11 @@ $data       = array();      // array to pass back data
     }
     // return all our data to an AJAX call
     echo json_encode($data);
+}else{
+// ==================================================== ALREADY CHOSEN A SITE TO MANAGE
 
+
+}
 
 
 ?>

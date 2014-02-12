@@ -12,7 +12,7 @@ $data 		= array(); 		// array to pass back data
 if (empty($_POST['username'])){
     $errors['username'] = 'Name is required.';
 }else{    
-    $username = $_POST[username];
+    $username = $_POST['username'];
     // verify username
     // if ok get password key 
     
