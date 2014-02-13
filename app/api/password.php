@@ -54,6 +54,7 @@ if ( empty($errors)) {
         $oppasskey = $tableau['OperatorPasswordKey'];
         $oplastsalt = $tableau['OperatorLastSalt'];
         $opisadmin = $tableau['OperatorIsAdmin'];
+        $userindex =  $tableau['OperatorIndex'];
         if( ((int)$jskey < (int)$oplastsalt) || (int)$jskey==0 ){
             $_SESSION = array(); 
             session_destroy();
@@ -76,6 +77,8 @@ if ( empty($errors)) {
         $updatesuccess=mysql_query("UPDATE OperatorTable SET OperatorLastSalt='$jskey' WHERE OperatorName='$username'");
         $_SESSION["islogged"]="1";
         $_SESSION["isadmin"]=$opisadmin ;
+        $_SESSION["username"]=$username;
+        $_SESSION["userindex"]=$userindex;        
         $_SESSION['managingsite']=0;
         $_SESSION['tablepastpage']=1;
         $_SESSION['rowsperpage']=5;

@@ -71,6 +71,14 @@ if ($_SESSION['managingsite']==0){
         $data['success'] = false;
         $data['errors']  = $errors;
     } else {
+        $user=array(
+        'isadmin' => $_SESSION["isadmin"],
+        'username' => $_SESSION["username"],
+        'userindex' => $_SESSION["userindex"]
+        );
+
+        $data['user']= $user;
+
         // if there are no errors, return a message
         $data['success'] = true;
         $data['sites'] = $r;

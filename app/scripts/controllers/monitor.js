@@ -35,6 +35,8 @@ angular.module('newsgipApp')
             } else {
               // SUCCESS !!
               $scope.sites=data.sites;
+              $scope.loggedAsUser = data.user.username;
+              console.log(data);
             }
 
             
@@ -58,6 +60,9 @@ angular.module('newsgipApp')
                   // SUCCESS !!
                   $scope.sitedata=data.sitedata;
                   $scope.tablepast=data.tablepast;
+                  //$scope.loggedAsUser = data.user;
+                  console.log(data);
+                  //if (data.isadmin===1) { $scope.isAdmin=1; }
                 }
               });
 
