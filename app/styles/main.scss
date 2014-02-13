@@ -106,3 +106,14 @@ margin-right:40px;
   cursor:pointer;
 }
 
+.bottom-pager ul.pager{margin-top:0;}
+
+.bottom-pager ul li a {
+  margin-left: 4px;
+}
+
+.bottom-pager ul li input {
+  width:70px;
+  float:right;
+  margin-left: 4px;
+}

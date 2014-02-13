@@ -50,8 +50,15 @@ angular.module('newsgipApp')
               })
             .success(function(data){
                 console.log(data);
-                //$scope.eventpast=data.eventpast;
-                //$scope.siteproc= data.siteproc;
+                if (!data.success) {
+                  // Responded ERROR
+                  $scope.message = data.errors;
+                
+                } else {
+                  // SUCCESS !!
+                  $scope.sitedata=data.sitedata;
+                  $scope.tablepast=data.tablepast;
+                }
               });
 
 /*  DOCUMENTATION FROM PHP
