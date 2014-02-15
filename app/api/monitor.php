@@ -98,6 +98,8 @@ LIMIT $startingpage , $GLOBALS[rowsperpage]
         $data['success'] = true;
         $data['sitedata'] = $sitedata;
         $data['tablepast'] = $tablepast;
+
+        //$_SESSION["isadmin"]
         
     }
     // return all our data to an AJAX call

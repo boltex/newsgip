@@ -66,6 +66,22 @@ angular.module('newsgipApp')
                 }
               });
 
+/*
+$(imgmath).fadeOut(400, function(){
+  $(imgmath).removeAttr('width').removeAttr('height').attr('src', 'images/backcrop/'+mathstring+'.jpg');
+} );
+
+$(imgmath).load(function () {
+  $(this).hide();
+  $('#backgroundmask').append(this);
+  $(this).fadeIn();
+});
+*/
+
+
+
+
+
 /*  DOCUMENTATION FROM PHP
 $tablepastquery="
 SELECT `EventIndex` , `EventStart` , `EventEntered`, `EventLicense` , `Desc` , `Action` , `CameraName`
