@@ -12,12 +12,8 @@ angular.module('newsgipApp', [
         redirectTo: '/login'
       })
       .when('/login', {
-        templateUrl: 'views/username.html',
-        controller: 'usernameCtrl'
-      })
-      .when('/password', {
-        templateUrl: 'views/password.html',
-        controller: 'passwordCtrl'
+        templateUrl: 'views/login.html',
+        controller: 'loginCtrl'
       })
       .when('/monitor', {
         templateUrl: 'views/monitor.html',

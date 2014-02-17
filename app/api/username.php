@@ -7,7 +7,7 @@ $lastsessionid = session_id();
 session_regenerate_id();
 
 $errors = array();  	// array to hold validation errors
-$data 		= array(); 		// array to pass back data
+$data 	= array(); 		// array to pass back data
 
 if (empty($_POST['username'])){
     $errors['username'] = 'Name is required.';

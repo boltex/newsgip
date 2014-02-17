@@ -8,12 +8,12 @@ angular.module('newsgipApp')
 	    // $scope will allow this to pass between controller and view
         $scope.formData = {};
 
-
         $scope.processLogin = function() {
             $scope.errorName = null;
+            $scope.formData.action = 'username' ;
             $http({
                 method: 'POST',
-                url: 'api/username.php',
+                url: 'api/login.php',
                 data: $.param($scope.formData),
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
               }).
