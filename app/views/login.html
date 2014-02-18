@@ -21,6 +21,7 @@
           placeholder="username" 
           ng-model="formData.username"
           ng-keypress="errorName = ''"
+          ui-keypress="{13:'enterusername()'}"
        />
     </div>
   </div>
@@ -43,7 +44,7 @@
   </div>
 
 
-  <button type="submit" ng-disabled="signupPassword.$invalid  || signupUsername.$invalid" class="btn btn-success btn-lg btn-block">
+  <button type="submit" ng-disabled="signupPassword.$invalid  || signupUsername.$invalid || submittinglogin" class="btn btn-success btn-lg btn-block">
   <span class="glyphicon glyphicon-flash"></span> Log In
   </button>
 

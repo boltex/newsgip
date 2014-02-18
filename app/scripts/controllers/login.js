@@ -8,8 +8,16 @@ angular.module('newsgipApp')
         // $scope will allow this to pass between controller and view
         $scope.formData = {};
         $scope.sendPass = {};
+        $scope.submittinglogin = null;
+
+        $scope.enterusername = function() {
+          $('#inputPassword').focus().select();
+        };
 
         $scope.processLogin = function() {
+            $scope.submittinglogin = true;
+            $('#inputUsername').prop('disabled', true);
+            $('#inputPassword').prop('disabled', true);
             $scope.errorName = null;
             $scope.formData.action = 'username' ;
             $http({
@@ -20,11 +28,13 @@ angular.module('newsgipApp')
               }).
             success(function (data) {
                 if (!data.success) {
-                  // Responded DOES NOT EXIST
-                  //console.log(data);
+                  // Responded USER DOES NOT EXIST
                   $scope.errorName = data.errors.message;
                   $scope.message = data.message;
                   $('#inputUsername').focus().select();
+                  $scope.submittinglogin = null;
+                  $('#inputUsername').prop('disabled', false);
+                  $('#inputPassword').prop('disabled', false);
                 } else {
                   // SUCCESS !!
                   $scope.message = data.message;
@@ -50,10 +60,12 @@ angular.module('newsgipApp')
                   }).
                 success(function (data) {
                     if (!data.success) {
-                      //console.log(data);
+                      // WRONG PASSWORD 
                       $scope.errorPassword = data.errors.message;
                       $('#inputPassword').focus().select();
-                      //$location.path('/');
+                      $scope.submittinglogin = null;
+                      $('#inputUsername').prop('disabled', false);
+                      $('#inputPassword').prop('disabled', false);
                     } else {
                       //console.log(data);
                       $scope.message = data.message;

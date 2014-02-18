@@ -4,7 +4,8 @@ angular.module('newsgipApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute'
+  'ngRoute',
+  'ui.keypress'
 ])
   .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
