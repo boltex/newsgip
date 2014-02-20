@@ -19,13 +19,25 @@ if ( empty($errors)) {
     switch ( $action ){
 
         case "premonitor":
+            // PREMONITOR, or if site: MONITOR
         	break;
+
+        case "changepage":
+            // CHANGE PAGE and MONITOR
+            break;            
 
         case "selectsite":
+            // SELECT SITE and MONITOR
         	break;
 
-        case "username":
-        	break;
+        case "addentry":
+            break;
+
+        case "editentry":
+            break;
+
+        case "delentry":
+            break;            
 
         default:
             break;
