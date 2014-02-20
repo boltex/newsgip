@@ -9,6 +9,17 @@ session_regenerate_id();
 $errors = array();      // array to hold validation errors
 $data   = array();      // array to pass back data
 
+    if ($_SESSION["islogged"]!="1")
+        $errors['message'] = 'Not logged.';
+    if (!isset($_SESSION['username']))  
+        $errors['message'] = 'Cookies must be enabled.'; 
+     if (!isset($_SESSION['managingsite']))  
+        $errors['message'] = 'managingsite session var missing'; 
+    if (!isset($_SESSION['tablepastpage']))  
+        $errors['message'] = 'tablepastpage session var missing';            
+    if (!isset($_SESSION['isadmin']))  
+        $errors['message'] = 'isadmin session var missing'; 
+
 // validate the variables ====================================================
 if (empty($_POST['action']))
     $errors['message'] = 'action is required.';
