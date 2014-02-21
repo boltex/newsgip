@@ -10,8 +10,14 @@ $errors = array();  	// array to hold validation errors
 $data 		= array(); 		// array to pass back data
 
 
-    if ($_SESSION["islogged"]!="1")
+    if ($_SESSION["islogged"]!="1"){
         $errors['message'] = 'Not logged.';
+        $data['success'] = false;
+        $data['errors']  = $errors;
+        echo json_encode($data);
+        exit();
+
+        }
     if (!isset($_SESSION['username']))  
         $errors['message'] = 'Cookies must be enabled.'; 
      if (!isset($_SESSION['managingsite']))  

@@ -30,8 +30,10 @@ angular.module('newsgipApp')
         .success(function(data){
             if (!data.success) {
               // Responded ERROR
+              if (data.errors.message==='Not logged.'){
+                $location.path('/login');
+              }
               $scope.message = data.errors;
-              
             } else {
               // SUCCESS !!
               $scope.sites=data.sites;
