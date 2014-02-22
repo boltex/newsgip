@@ -13,6 +13,7 @@ html,
 body {
   height: 100%;
   /* The html and body elements cannot have any padding or margin. */
+ /* background: url('../images/woodplanks.jpg') no-repeat center center;*/
 }
 
 /* Wrapper for page content to push down footer */
@@ -108,7 +109,7 @@ margin-right:40px;
 
 
 .bottom-pager ul li input {
-  width:70px;
+  width:50px;
   float:left;
 
 }
@@ -116,3 +117,11 @@ margin-right:40px;
 #inputPassword, #inputUsername{
   margin-bottom: 15px;
 }
+
+.jumbotron{
+  background: url('../images/desert3.jpg') no-repeat center center;
+  h1, p {text-shadow:0px 0px 6px #FFFFFF;}
+}
+
+
+

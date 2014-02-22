@@ -1,6 +1,6 @@
 <?php
 require('_includes/sgipdata.php');
-//require("_includes/functions.php");
+require('_includes/functions.php');
 session_cache_expire(60);
 session_start();
 $lastsessionid = session_id();
@@ -9,26 +9,20 @@ session_regenerate_id();
 $errors = array();      // array to hold validation errors
 $data   = array();      // array to pass back data
 
-
-    if ($_SESSION["islogged"]!="1"){
-        $errors['message'] = 'Not logged.';
-        $data['success'] = false;
-        $data['errors']  = $errors;
-        echo json_encode($data);
-        exit();
-
+    if ($_SESSION["islogged"]!="1")
+        quitMessage($errors,$data, 'Not logged.');
     if (!isset($_SESSION['username']))  
-        $errors['message'] = 'Cookies must be enabled.'; 
-     if (!isset($_SESSION['managingsite']))  
-        $errors['message'] = 'managingsite session var missing'; 
+        quitMessage($errors,$data,  'Cookies must be enabled.'); 
+    if (!isset($_SESSION['managingsite']))  
+        quitMessage($errors,$data, 'managingsite session var missing'); 
     if (!isset($_SESSION['tablepastpage']))  
-        $errors['message'] = 'tablepastpage session var missing';            
+        quitMessage($errors,$data, 'tablepastpage session var missing');            
     if (!isset($_SESSION['isadmin']))  
-        $errors['message'] = 'isadmin session var missing'; 
+        quitMessage($errors,$data, 'isadmin session var missing'); 
 
 // validate the variables ====================================================
 if (empty($_POST['action']))
-    $errors['message'] = 'action is required.';
+    quitMessage($errors,$data, 'action is required.');
 
 $action = $_POST['action'];
 
@@ -48,6 +42,7 @@ if ( empty($errors)) {
         	break;
 
         case "addentry":
+            
             break;
 
         case "editentry":
@@ -80,8 +75,5 @@ if ( empty($errors)) {
 
     // return all our data to an AJAX call
     echo json_encode($data);
-
-
-
 
 ?>

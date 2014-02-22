@@ -1,6 +1,6 @@
 <?php
 require('_includes/sgipdata.php');
-//require("_includes/functions.php");
+require('_includes/functions.php');
 session_cache_expire(60);
 session_start();
 $lastsessionid = session_id();
