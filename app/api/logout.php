@@ -1,5 +1,8 @@
 <?php
-
+require('_includes/sgipdata.php');
+//require("_includes/functions.php");
+session_cache_expire(60);
+session_start();
 $_SESSION = array(); // LE GARS A CLIQUER LOGOUT !!! BABYE !
 session_destroy();
 
