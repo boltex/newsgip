@@ -48,7 +48,7 @@ if ( empty($errors)) {
 
 if ($_SESSION['managingsite']==0){
 //-----------------------------------------------------------
- $numofsites=0;
+    $numofsites=0;
     $allsites=array();
     // get all sites
     $siteexists=mysql_query("SELECT SiteIndex, SiteName, SiteMapUrl  FROM SitesTable ");
@@ -69,7 +69,7 @@ if ($_SESSION['managingsite']==0){
     //while($r[]=mysql_fetch_array($siteexists)); //$r now contains whole array
 
 
-// return a response : if success give $oppasskey  ============================
+    // return a response : if success give $oppasskey  ============================
     // response if there are errors
     if ( ! empty($errors)) {
         //$data['mainmessage'] = $_POST;
@@ -82,7 +82,6 @@ if ($_SESSION['managingsite']==0){
         'username' => $_SESSION["username"],
         'userindex' => $_SESSION["userindex"]
         );
-
         $data['user']= $user;
 
         // if there are no errors, return a message

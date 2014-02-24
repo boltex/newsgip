@@ -1,152 +1,104 @@
 <?php
+require('_includes/sgipdata.php');
+require('_includes/functions.php');
+session_cache_expire(60);
+session_start();
+$lastsessionid = session_id();
+session_regenerate_id();
 
-namespace Api;
+$errors = array();      // array to hold validation errors
+$data   = array();      // array to pass back data
 
-use \Exception;
+if ($_SESSION["islogged"]!="1")
+    quitMessage($errors,$data, 'Not logged.');
+if (!isset($_SESSION['username']))  
+    quitMessage($errors,$data,  'Cookies must be enabled.'); 
+if (!isset($_SESSION['managingsite']))  
+    quitMessage($errors,$data, 'managingsite session var missing'); 
+if (!isset($_SESSION['tablepastpage']))  
+    quitMessage($errors,$data, 'tablepastpage session var missing');            
+if (!isset($_SESSION['isadmin']))  
+    quitMessage($errors,$data, 'isadmin session var missing'); 
 
-try {
-    // Prevent displaying errors
-    ob_start();
+if (empty($_POST['action']))
+    quitMessage($errors,$data, 'action is required.');
+$action = $_POST['action'];
 
-    $response = array();
-    $allowedMethods = array('GET');
-    $allowedHeaders = array();
-
-    $resources = array(
-        'html5-boilerplate' => array(
-            'name' => 'HTML5 Boilerplate',
-            'description' => 'test Boilerplate is a professional front-end template'
-                . ' for building fast, robust, and adaptable web apps or sites.',
-        ),
-        'angular' => array(
-            'name' => 'Angular',
-            'description' => 'AngularJS is a toolset for building the framework most'
-                . ' suited to your application development.',
-        ),
-        'karma' => array(
-            'name' => 'Karma',
-            'description' => 'Spectacular Test Runner for JavaScript.',
-        ),
-    );
-
-    // Get headers and normalize them
-    if (function_exists('getallheaders')) {
-        $headers = getallheaders();
+//----------------------------------------------- MYSQL CONNECTION
+try{
+    $dblink = @mysql_connect("localhost", $db_user, $db_password ) ;
+    if (!$dblink) {
+        quitMessage($errors,$data, 'Error mysql_connect');
+    }else{
+    mysql_select_db($db_database,$dblink); // same name : sgipuser
     }
-    else {
-        $headers = array();
-        foreach ($_SERVER as $name => $value) {
-            if (preg_match('/^HTTP_(.*)$/', $name, $matches)) {
-                $headers[str_replace('_', '-', $matches[1])] = $value;
+} catch(Exception $e) {
+    quitMessage($errors,$data, 'Error mysql_select_db');
+}
+
+if ( empty($errors)) {
+    switch ( $action ){
+
+        case "premonitor":
+            // PREMONITOR, or if site: MONITOR
+            if ($_SESSION['managingsite']==0){
+                premonitor($errors, $data);
+            }else{
+                premonitor($errors, $data);
+                monitor($errors, $data);
             }
-        }
-    }
-    foreach ($headers as $name => $value) {
-        unset($headers[$name]);
-        $headers[ucwords(strtolower($name))] = $value;
-    }
+        	break;           
 
-    // Handle OPTIONS method
-    if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-        header('Allow: ' . implode(', ', $allowedMethods));
-        header('Access-Control-Allow-Methods: ' . implode(', ', $allowedMethods));
-        header('Access-Control-Allow-Origin: *');
-        header('Access-Control-Request-Headers: ' . implode(', ', $allowedHeaders));
-        exit();
-    }
+        case "selectsite":
+            // SELECT SITE and MONITOR
+            if (empty($_POST['SiteIndex']))
+                quitMessage($errors,$data,'SiteIndex is required.');
+            $managingsite = $_POST['SiteIndex'];
+            $_SESSION['managingsite'] = $managingsite;
+            premonitor($errors, $data);
+            monitor($errors, $data);
+        	break;
 
-    // Reject if method is not allowed
-    if (!in_array($_SERVER['REQUEST_METHOD'], $allowedMethods)) {
-        throw new Exception(
-            'Only ' . implode(', ', $allowedMethods)
-            . (count($allowedMethods) === 1 ? ' method is' : ' methods are')
-            . ' allowed',
-            405
-        );
-    }
+        case "changepage":
+            // CHANGE PAGE and MONITOR
+            break;     
 
-    // Reject if not acceptable
-    if (!array_key_exists('Accept', $headers) || !in_array('application/json', explode(', ', $headers['Accept']))) {
-        throw new Exception('Only application/json is acceptable', 406);
-    }
-
-    /**
-     * -------------------------------------------------------------------------
-     * /resource/{id}
-     * -------------------------------------------------------------------------
-     */
-    if (isset($_GET['id'])) {
-        if (!preg_match('/^[a-z0-9-]+$/', $id = $_GET['id'])) {
-            throw new Exception('
-             id must contain only lowercase alphanumeric and - characters', 400);
-        }
-        if (!array_key_exists($id, $resources)) {
-            throw new Exception("Resource with id $id does not exist", 404);
-        }
-        $response = array_merge(
-            $response,
-            array('id' => $id),
-            $resources[$id]
-        );
-    }
-    /**
-     * -------------------------------------------------------------------------
-     * /resource
-     * -------------------------------------------------------------------------
-     */
-    else {
-        $url = 'http' . (array_key_exists('HTTPS', $_SERVER) && $_SERVER['HTTPS'] === 'on' ? 's' : '') . '://'
-            . $headers['Host'] . preg_replace('/^(\/api)?/', '/api', $_SERVER['REQUEST_URI']);
-
-        $response['resources'] = array();
-        foreach ($resources as $id => $resource) {
-            array_push($response['resources'], array(
-                'id' => $id,
-                'name' => $resource['name'],
-                'href' => preg_match('/\.php$/', $url) ? "$url?id=$id" : "$url/$id",
-            ));
-        }
-    }
-
-    // Catch non-exception errors
-    $output = ob_get_clean();
-    if ($output !== '') {
-        throw new Exception(trim($output), 500);
-    }
-
-    header('HTTP/1.1 200 OK');
-    header('Content-Type: application/json');
-    echo json_encode($response);
-}
-catch(Exception $e) {
-
-    $response = array(
-        'status' => $e->getCode(),
-        'statusText' => null,
-        'description' => $e->getMessage(),
-        'stack' => $e->getTrace(),
-    );
-
-    switch ($response['status']) {
-        case 400:
-            $response['statusText'] = 'Bad Request';
+        case "addentry":
+            
             break;
-        case 404:
-            $response['statusText'] = 'Not Found';
+
+        case "editentry":
             break;
-        case 405:
-            $response['statusText'] = 'Method Not Allowed';
-            break;
-        case 406:
-            $response['statusText'] = 'Not Acceptable';
-            break;
+
+        case "delentry":
+            break;     
+
+        case "rowsperpage":
+            break;        
+
         default:
-            $response['statusText'] = 'Internal Server Error';
-            $response['status'] = 500;
             break;
+
+    }
+}
+
+
+
+// return a response =========================================================
+    // response if there are errors
+    if ( ! empty($errors)) {
+        //$data['mainmessage'] = $_POST;
+        // if there are items in our errors array, return those errors
+        $data['success'] = false;
+        $data['errors']  = $errors;
+    } else {
+
+        // if there are no errors, return a message
+        $data['success'] = true;
+        
     }
 
-    header('HTTP/1.1 ' . $response['status'] . ' ' . $response['statusText']);
-    header('Content-Type: application/json');
-    echo json_encode($response);
-}
+    // return all our data to an AJAX call
+    echo json_encode($data);
+
+?>

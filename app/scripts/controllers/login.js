@@ -74,19 +74,15 @@ angular.module('newsgipApp')
 
                   }).
                 error(function (data) {
-                    $scope.error = data.description || 'Server is unreachable';
+                    $scope.message = data.description || 'Server is unreachable';
                   });
-                  
-
-
-
 
                 }
 
               }).
             error(function (data) {
                 //console.log('wtf error');
-                $scope.error = data.errors || 'Server is unreachable';
+                $scope.message = data.errors || 'Server is unreachable';
               });
           };
 

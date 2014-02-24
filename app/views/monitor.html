@@ -3,12 +3,17 @@
 <div class="container">
 
   <div class="row">
-    <div id="currentlogged" class="col-xs-12 col-sm-4 col-md-4 ">
-      <div class="well well-sm"> Logged as {{loggedAsUser}} </div>
+    <div id="currentlogged" class="col-xs-12 col-sm-8 col-md-8 ">
+      <div class="well well-sm">
+        <span>Logged as {{loggedAsUser}}</span>
+         <span class="pull-right">{{datetime}}</span>
+     </div>
     </div>
+    <!--
     <div id="currentdate" class="col-xs-12 col-sm-4 col-md-4 " >
-      <div class="well well-sm"> {{datetime}}</div>
+      <div class="well well-sm">{{datetime}}</div>
     </div>
+    -->
     <div id="currentsite" class="col-xs-12 col-sm-4 col-md-4" >
       <div class=" btn-group btn-block">
         <button type="button" class="btn btn-default btn-block dropdown-toggle" data-toggle="dropdown" >
@@ -52,15 +57,23 @@
 </div>
 
 <div class="row">
-  <div id="tablechecks" class="col-xs-3">
+  <div id="tablechecks" class="col-xs-5 col-sm-3 col-md-4">
     <ul class="pagination pagination-sm">
       <li><a>Edit</a></li>
       <li><a>Delete</a></li>
     </ul>
   </div>
-  <div id="pagenav" class="col-xs-6 bottom-pager ">
+  <div id="rowsperpage" class="col-xs-7 col-sm-3 col-md-4 col-sm-push-6 col-md-push-4">
+    <ul class="pagination pagination-sm pull-right">
+      <li><a>5</a></li>
+      <li><a>10</a></li>
+      <li><a>25</a></li>
+      <li><a>50</a></li>
+    </ul>
+  </div>
+  <div id="pagenav" class="col-xs-12 col-sm-6 col-md-4 col-sm-pull-3 col-md-pull-4 bottom-pager text-center">
    <ul class="pagination pagination-sm">
-          <li><a>&laquo;</a></li>
+      <li><a>&laquo;</a></li>
       <li><a>&lt;</a></li>
       <li><a>&gt;</a></li>
       <li><a>&raquo;</a></li>
@@ -68,12 +81,7 @@
       <li><a>Goto Page</a></li>
     </ul>
   </div>
-  <div id="tablechecks" class="col-xs-2">
-    <ul class="pagination pagination-sm">
-      <li><a>Edit</a></li>
-      <li><a>Delete</a></li>
-    </ul>
-  </div>
+  
 </div>
 
 </div>
