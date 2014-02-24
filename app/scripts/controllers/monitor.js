@@ -71,6 +71,12 @@ angular.module('newsgipApp')
 
           };
 
+        $scope.changerowsperpage = function(param){
+          console.log(param);
+        }  
+
+        $scope.rowsperpagelist = [5,10,25,50] ;
+
         $scope.datetime =formatAMPM();
         setInterval( function(){ $scope.datetime = formatAMPM(); $scope.$apply(); } , 60000);
 
