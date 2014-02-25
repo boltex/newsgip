@@ -31,7 +31,8 @@ function premonitor($errors, $data){
 	$user=array(
         'isadmin' => $_SESSION["isadmin"],
         'username' => $_SESSION["username"],
-        'userindex' => $_SESSION["userindex"]
+        'userindex' => $_SESSION["userindex"],
+        'rowsperpage' =>$_SESSION['rowsperpage']
     );
     $data['user']= $user;
     $data['sites'] = $r;

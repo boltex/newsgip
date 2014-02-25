@@ -19,6 +19,8 @@ if (!isset($_SESSION['tablepastpage']))
     quitMessage($errors,$data, 'tablepastpage session var missing');            
 if (!isset($_SESSION['isadmin']))  
     quitMessage($errors,$data, 'isadmin session var missing'); 
+if (!isset($_SESSION['rowsperpage']))  
+    quitMessage($errors,$data, 'rowsperpage session var missing'); 
 
 if (empty($_POST['action']))
     quitMessage($errors,$data, 'action is required.');
