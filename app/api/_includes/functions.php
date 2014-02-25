@@ -1,6 +1,6 @@
 <?php
 
-function quitMessage($errors,$data, $message){
+function quitMessage(&$errors,&$data, $message){
 	$errors['message'] = $message;
 	$_SESSION = array(); 
     session_destroy();
@@ -10,7 +10,7 @@ function quitMessage($errors,$data, $message){
     exit();
 }
 
-function premonitor($errors, $data){
+function premonitor(&$errors, &$data){
 	$numofsites=0;
     $allsites=array();
     // get all sites
@@ -38,7 +38,7 @@ function premonitor($errors, $data){
     $data['sites'] = $r;
 }
 
-function monitor($errors, $data){
+function monitor(&$errors, &$data){
 
 	$managingsite = $_SESSION['managingsite'];
 	 $siteexists=mysql_query("SELECT SiteProtocolText, SiteName, SiteMapUrl FROM SitesTable WHERE SiteIndex='$managingsite'");

@@ -55,8 +55,7 @@ if ( empty($errors)) {
             // SELECT SITE and MONITOR
             if (empty($_POST['SiteIndex']))
                 quitMessage($errors,$data,'SiteIndex is required.');
-            $managingsite = $_POST['SiteIndex'];
-            $_SESSION['managingsite'] = $managingsite;
+            $_SESSION['managingsite'] =$_POST['SiteIndex'];
             premonitor($errors, $data);
             monitor($errors, $data);
         	break;
@@ -76,6 +75,9 @@ if ( empty($errors)) {
             break;     
 
         case "rowsperpage":
+            $_SESSION['rowsperpage'] = $data['rowsperpage'] = $_POST['rowsperpage'];
+            premonitor($errors, $data);
+            monitor($errors, $data);
             break;        
 
         default:
