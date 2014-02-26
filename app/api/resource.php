@@ -48,6 +48,7 @@ if ( empty($errors)) {
             }else{
                 premonitor($errors, $data);
                 monitor($errors, $data);
+                pagenav($errors, $data);
             }
         	break;           
 
@@ -58,6 +59,7 @@ if ( empty($errors)) {
             $_SESSION['managingsite'] =$_POST['SiteIndex'];
             premonitor($errors, $data);
             monitor($errors, $data);
+            pagenav($errors, $data);
         	break;
 
         case "changepage":
@@ -78,6 +80,7 @@ if ( empty($errors)) {
             $_SESSION['rowsperpage'] = $data['rowsperpage'] = $_POST['rowsperpage'];
             premonitor($errors, $data);
             monitor($errors, $data);
+            pagenav($errors, $data);
             break;        
 
         default:

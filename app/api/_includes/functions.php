@@ -45,7 +45,6 @@ function monitor(&$errors, &$data){
 	    $numofsites = mysql_num_rows($siteexists);     
 	       if($numofsites>0){
 	        $sitedata= mysql_fetch_assoc($siteexists );
-
 	//==================================================== COMPUTE STARTING 
 	$startingpage = ( intval($_SESSION['tablepastpage'])- 1 ) * intval($_SESSION['rowsperpage']);   
 	    
@@ -74,6 +73,24 @@ function monitor(&$errors, &$data){
 	   }
 	$data['sitedata'] = $sitedata; 
  	$data['tablepast'] = $tablepast;  
+}
+
+function pagenav(&$errors, &$data){
+	$currentsite = $_SESSION["currentsite"];	
+	if($currentsite==0 or $currentsite=="none"){
+		$_SESSION['tablelastpage'] = $data['tablelastpage']= 0;
+		return;
 	}
- 	
- ?>
+	$query   = "SELECT COUNT(EventIndex) AS numrows FROM EventTable WHERE EventSite='$currentsite'";
+	$result  = mysql_query($query) or die('Error, query pagenav failed');
+	$row     = mysql_fetch_array($result, MYSQL_ASSOC);
+	$numrows = $row['numrows'];
+	// #####    how many pages we have when using paging?
+	$maxPage = ceil( $numrows/  $_SESSION['rowsperpage'] );
+	$_SESSION['tablelastpage'] = $data['tablelastpage']= $maxPage;
+}
+
+
+
+?>
+
