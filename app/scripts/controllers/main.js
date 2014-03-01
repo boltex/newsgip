@@ -11,5 +11,11 @@ angular.module('newsgipApp')
             }
           };
 
+        $scope.isCollapsed = true;
+        $scope.$on('$routeChangeSuccess', function () {
+            $scope.isCollapsed = true;
+          });
     
       }]);
+
+
