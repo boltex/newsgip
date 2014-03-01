@@ -47,6 +47,8 @@ angular.module('newsgipApp')
                 $scope.sitedata=data.sitedata;
                 $scope.tablepast=data.tablepast;
                 $scope.currentsite=$scope.sitedata.SiteName;
+                $scope.tablepastpage = data.tablepastpage;
+                $scope.tablelastpage = data.tablelastpage;
               }
               //console.log(data);
             }
@@ -73,6 +75,8 @@ angular.module('newsgipApp')
                   // SUCCESS !!
                   $scope.sitedata=data.sitedata;
                   $scope.tablepast=data.tablepast;
+                  $scope.tablepastpage = data.tablepastpage;
+                  $scope.tablelastpage = data.tablelastpage;
                   //$scope.loggedAsUser = data.user;
                   //console.log(data);
                   //if (data.isadmin===1) { $scope.isAdmin=1; }
@@ -104,7 +108,8 @@ angular.module('newsgipApp')
                 $scope.rowsperpage=data.rowsperpage;
                 $scope.sitedata=data.sitedata;
                 $scope.tablepast=data.tablepast;
-                console.log(data);
+                $scope.tablepastpage = data.tablepastpage;
+                $scope.tablelastpage = data.tablelastpage;
               }
             }).error(function(data){
               console.log('Error man... :'+data);

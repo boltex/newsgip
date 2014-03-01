@@ -64,6 +64,36 @@ if ( empty($errors)) {
 
         case "changepage":
             // CHANGE PAGE and MONITOR
+                if ( !isset($_POST['page']) ){
+                    die("Needs page ");
+                }
+                if( $_POST['page']=="goto" ){
+                    $_SESSION['tablepastpage'] =(  (int)$_POST['thegoto']  ) ;
+                    if (!is_int($_SESSION['tablepastpage'])){
+                        $_SESSION['tablepastpage'] =1;
+                    }
+                }
+                if( $_POST['page']=="next" ){
+                    $_SESSION['tablepastpage'] +=1;
+                }
+                if( $_POST['page']=="prev" ){
+                    $_SESSION['tablepastpage'] -=1;
+                }
+                if($_SESSION['tablepastpage'] <1){
+                    $_SESSION['tablepastpage'] =1;
+                }
+                if( $_POST['page']=="first" ){
+                    $_SESSION['tablepastpage'] = 1;
+                }
+                if( $_POST['page']=="last" ){
+                    $_SESSION['tablepastpage'] = $_SESSION['tablelastpage'];
+                }
+                if ( $_SESSION['tablepastpage'] > $_SESSION['tablelastpage']){
+                    $_SESSION['tablepastpage'] = $_SESSION['tablelastpage']; 
+                }
+                monitor($errors, $data);
+                pagenav($errors, $data);
+   
             break;     
 
         case "addentry":

@@ -76,9 +76,10 @@ function monitor(&$errors, &$data){
 }
 
 function pagenav(&$errors, &$data){
-	$currentsite = $_SESSION["currentsite"];	
+	$currentsite = $_SESSION['managingsite'];	
 	if($currentsite==0 or $currentsite=="none"){
 		$_SESSION['tablelastpage'] = $data['tablelastpage']= 0;
+		$data['test'] = "currentsite is".$currentsite;
 		return;
 	}
 	$query   = "SELECT COUNT(EventIndex) AS numrows FROM EventTable WHERE EventSite='$currentsite'";
@@ -88,6 +89,7 @@ function pagenav(&$errors, &$data){
 	// #####    how many pages we have when using paging?
 	$maxPage = ceil( $numrows/  $_SESSION['rowsperpage'] );
 	$_SESSION['tablelastpage'] = $data['tablelastpage']= $maxPage;
+	$data['tablepastpage'] = $_SESSION['tablepastpage'];
 }
 
 

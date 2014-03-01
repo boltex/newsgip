@@ -128,5 +128,8 @@ margin-right:40px;
   a {
     cursor: pointer;
   }
+  .disabled>a, .disabled>a:hover, {
+    cursor: default;
+  }
 }
 
