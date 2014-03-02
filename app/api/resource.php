@@ -57,6 +57,7 @@ if ( empty($errors)) {
             if (empty($_POST['SiteIndex']))
                 quitMessage($errors,$data,'SiteIndex is required.');
             $_SESSION['managingsite'] =$_POST['SiteIndex'];
+            $_SESSION['tablepastpage'] = 1; // back to page 1
             premonitor($errors, $data);
             monitor($errors, $data);
             pagenav($errors, $data);

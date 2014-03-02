@@ -116,6 +116,30 @@ angular.module('newsgipApp')
             });
         };
 
+        $scope.showpage = function(param){
+          var datasend = {} ;
+          datasend.action= 'changepage';
+          datasend.page = param;
+          if(param==='goto'){datasend.thegoto=$('#thegoto').value ; }
+          $http({
+            method: 'POST',
+            url: 'api/resource.php',
+            data: $.param( datasend ),
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+          })
+          .success(function(data){
+            console.log(data);
+            //$scope.rowsperpage=data.rowsperpage;
+            $scope.sitedata=data.sitedata;
+            $scope.tablepast=data.tablepast;
+            $scope.tablepastpage = data.tablepastpage;
+            $scope.tablelastpage = data.tablelastpage;
+          })
+          .error(function(data){
+            console.log('Error man... :'+data);
+          });
+        };
+
         $scope.rowsperpagelist = [5,10,25,50] ;
 
         $scope.datetime =formatAMPM();

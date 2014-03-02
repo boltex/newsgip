@@ -55,7 +55,7 @@ function monitor(&$errors, &$data){
 	AND `EventTable`.`EventAction` = `ActionTable`.`ActionIndex`
 	AND `EventTable`.`EventCamera` = `CameraTable`.`CameraIndex`
 	AND `EventSite` = '$managingsite' ORDER BY `EventStart` DESC 
-	LIMIT $startingpage , $GLOBALS[rowsperpage]
+	LIMIT $startingpage , $_SESSION[rowsperpage]
 	";    
 	    $eventsexists = mysql_query($tablepastquery);
 	    $numofevents = @mysql_num_rows($eventsexists); 
