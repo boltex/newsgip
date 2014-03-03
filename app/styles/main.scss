@@ -51,7 +51,7 @@ body {
 .footer {
     /*border-top: 1px solid #e5e5e5;*/
     height: 60px;
-    background-color: #f5f5f5;
+    /*background-color: #f5f5f5;*/
 }
 
 
@@ -139,5 +139,10 @@ margin-right:40px;
 }
 
 .well, .well-sm {
-  margin-bottom:10px;
+  margin-bottom:15px;
+}
+
+
+#choosesite-btn{
+  margin-bottom:15px;
 }
