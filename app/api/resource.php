@@ -58,7 +58,6 @@ if ( empty($errors)) {
                 quitMessage($errors,$data,'SiteIndex is required.');
             $_SESSION['managingsite'] =$_POST['SiteIndex'];
             $_SESSION['tablepastpage'] = 1; // back to page 1
-            premonitor($errors, $data);
             monitor($errors, $data);
             pagenav($errors, $data);
         	break;
@@ -108,8 +107,12 @@ if ( empty($errors)) {
             break;     
 
         case "rowsperpage":
+            // TODO : FIX STARTING PAGE  :  $_SESSION['tablepastpage']
+            // from functions : $startingpage = ( intval($_SESSION['tablepastpage'])- 1 ) * intval($_SESSION['rowsperpage']);
+            $startingpage = ( intval($_SESSION['tablepastpage'])- 1 ) * intval($_SESSION['rowsperpage']);
+            $_SESSION['tablepastpage'] = floor( intval($startingpage) / intval($_POST['rowsperpage']) +1 );
+            // 
             $_SESSION['rowsperpage'] = $data['rowsperpage'] = $_POST['rowsperpage'];
-            premonitor($errors, $data);
             monitor($errors, $data);
             pagenav($errors, $data);
             break;        

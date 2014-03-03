@@ -11,6 +11,12 @@ function formatAMPM() {
 	return days[d.getDay()]+' '+months[d.getMonth()]+' '+d.getDate()+' '+d.getFullYear()+' '+hours+':'+minutes;
 }
 
+function columnConform(){
+  var newheight=$('#birdseye-img').height();
+  $('#procedure-well').height(newheight-18);
+
+}
+
 angular.module('newsgipApp')
     .controller('monitorCtrl', ['$scope', '$http', '$location',  function ($scope, $http, $location ) {
 
@@ -40,6 +46,9 @@ angular.module('newsgipApp')
               // SUCCESS !!
               $scope.sites=data.sites;
               $scope.loggedAsUser = data.user.username;
+              $scope.isadmin = data.isadmin;
+              $scope.rowsperpage = data.rowsperpage;
+
               if (typeof data.tablepast === 'undefined') {
               // variable is undefined NO DATA
               }else{
@@ -49,6 +58,8 @@ angular.module('newsgipApp')
                 $scope.currentsite=$scope.sitedata.SiteName;
                 $scope.tablepastpage = data.tablepastpage;
                 $scope.tablelastpage = data.tablelastpage;
+                $('#birdseye-img').load( columnConform );
+                //columnConform();
               }
               //console.log(data);
             }
@@ -80,6 +91,8 @@ angular.module('newsgipApp')
                   //$scope.loggedAsUser = data.user;
                   //console.log(data);
                   //if (data.isadmin===1) { $scope.isAdmin=1; }
+                  $('#birdseye-img').load( columnConform );
+                  
                 }
               });
 
@@ -87,7 +100,9 @@ angular.module('newsgipApp')
           };
 
         $scope.changerowsperpage = function(param){
-          //console.log(param);
+          if(param === Number($scope.rowsperpage)){
+            return;
+          }
           var datasend = {} ;
           datasend.action= 'rowsperpage';
           datasend.rowsperpage = param;
@@ -120,7 +135,8 @@ angular.module('newsgipApp')
           var datasend = {} ;
           datasend.action= 'changepage';
           datasend.page = param;
-          if(param==='goto'){datasend.thegoto=$('#thegoto').value ; }
+          if(param==='goto'){datasend.thegoto=$scope.thegoto; }
+          console.log(datasend);
           $http({
             method: 'POST',
             url: 'api/resource.php',
@@ -128,8 +144,6 @@ angular.module('newsgipApp')
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
           })
           .success(function(data){
-            console.log(data);
-            //$scope.rowsperpage=data.rowsperpage;
             $scope.sitedata=data.sitedata;
             $scope.tablepast=data.tablepast;
             $scope.tablepastpage = data.tablepastpage;
@@ -144,5 +158,11 @@ angular.module('newsgipApp')
 
         $scope.datetime =formatAMPM();
         setInterval( function(){ $scope.datetime = formatAMPM(); $scope.$apply(); } , 60000);
+
+        $(window).resize(function() {
+          columnConform();
+        });
+
+
 
       }]);

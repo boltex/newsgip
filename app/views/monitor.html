@@ -21,13 +21,26 @@
   <div ng-show="message">{{message}}</div>
 
   <div class="row" ng-show="sitedata">
-    <div id="birdseye" class="col-xs-12 col-sm-6 col-md-6">img</div>
-    <div id="procedures" class="col-xs-12 col-sm-6 col-md-6">{{sitedata.SiteProtocolText}}</div>  
+
+      <div id="birdseye" class="col-xs-12 col-sm-6 col-md-6 text-center" >
+        <img id="birdseye-img" src="siteimages/{{sitedata.SiteMapUrl}}" alt="Bird's eye view" class="img-rounded sitemapimg" >
+      </div>
+
+      <div id="procedures" class="col-xs-12 col-sm-6 col-md-6  hidden-xs">
+        <div class="well well-sm" id="procedure-well">{{sitedata.SiteProtocolText}}</div>
+      </div>  
+
+      <div id="procedures-lg" class="col-xs-12 hidden-sm hidden-md hidden-lg">
+        <div class="well well-sm" id="procedure-well">{{sitedata.SiteProtocolText}}</div>
+      </div>  
+
   </div>
 
 <div class="table-responsive" ng-show="sitedata">
+  <form name='tablechecksform' id='tablechecksform'>
   <table class="table table-striped table-hover table-condensed">
   	<thead>
+      <th ng-show="isadmin"> </th>
   		<th>Description</th>
   		<th>Action Taken</th>
   		<th>Licence</th>
@@ -37,6 +50,7 @@
 	  </thead>
     <tbody>
     	<tr ng-repeat="event in tablepast | filter:EventStart">
+      <td ng-show="isadmin"><input type="radio" name='checkselect' value='{{event.EventIndex}}'></td>
     	<td>{{event.Desc}}</td>
       <td>{{event.Action}}</td>
       <td>{{event.EventLicense}}</td>
@@ -49,15 +63,17 @@
 </div>
 
 <div class="row" ng-show="sitedata">
+
   <div id="tablechecks" class="col-xs-5 col-sm-3 col-md-4">
-    <ul class="pagination pagination-sm">
+    <ul class="pagination pagination-sm" ng-show="isadmin">
       <li><a>Edit</a></li>
       <li><a>Delete</a></li>
     </ul>
   </div>
+
   <div id="rowsperpage" class="col-xs-7 col-sm-3 col-md-3 col-sm-push-6 col-md-push-5">
     <ul class="pagination pagination-sm pull-right">
-      <li ng-repeat="rpp in rowsperpagelist"><a ng-click="changerowsperpage(rpp);">{{rpp}}</a></li>
+      <li ng-repeat="rpp in rowsperpagelist" ng-class="{active:rowsperpage==rpp}"><a ng-click="changerowsperpage(rpp);">{{rpp}}</a></li>
     </ul>
   </div>
   <div id="pagenav" class="col-xs-12 col-sm-6 col-md-5 col-sm-pull-3 col-md-pull-3 bottom-pager text-center">
@@ -66,11 +82,9 @@
       <li><a ng-click="showpage('prev');">&lt;</a></li>
       <li><a ng-click="showpage('next');">&gt;</a></li>
       <li><a ng-click="showpage('last');">&raquo;</a></li>
-      <li><input type="number" placeholder="#" class="input-sm" id="thegoto"></li>
+      <li><input type="number" placeholder="#" class="input-sm" ng-model="thegoto"></li>
       <li><a ng-click="showpage('goto');">Goto</a></li>
       <li class="disabled"><a>page {{tablepastpage}} of {{tablelastpage}}</a></li>
     </ul>
   </div>
 </div>
-
-

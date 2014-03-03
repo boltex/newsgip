@@ -31,11 +31,12 @@ function premonitor(&$errors, &$data){
 	$user=array(
         'isadmin' => $_SESSION["isadmin"],
         'username' => $_SESSION["username"],
-        'userindex' => $_SESSION["userindex"],
-        'rowsperpage' =>$_SESSION['rowsperpage']
+        'userindex' => $_SESSION["userindex"]
     );
+    $data['rowsperpage'] =$_SESSION['rowsperpage'];
     $data['user']= $user;
     $data['sites'] = $r;
+    $data['isadmin'] = $_SESSION["isadmin"];
 }
 
 function monitor(&$errors, &$data){
