@@ -21,7 +21,6 @@
   <div ng-show="message">{{message}}</div>
 
   <div class="row" ng-show="sitedata">
-
       <div id="birdseye" class="col-xs-12 col-sm-6 col-md-6 text-center" >
         <img id="birdseye-img" src="siteimages/{{sitedata.SiteMapUrl}}" alt="Bird's eye view" class="img-rounded sitemapimg" >
       </div>
@@ -32,8 +31,34 @@
       <div id="procedures-lg" class="col-xs-12 hidden-sm hidden-md hidden-lg">
         <div class="well well-sm" id="procedure-well">{{sitedata.SiteProtocolText}}</div>
       </div>  
+  </div>
+
+<div id="entry" class="row">
+  <div class="col-xs-12" ng-hide="entrymode">
+    <button type="button" class="btn btn-primary btn-block" ng-click="addEntry()">New Entry</button>
+  </div>
+  <div class="col-xs-12 "ng-show="entrymode">
+
+    <div class="btn-group-vertical pull-left" >
+      
+        <button type="button" class="btn btn-info btn-sm," ng-click="resetEntry()">Reset</button>
+        <button type="button" class="btn btn-primary btn-sm," ng-click="cancelEntry()">Cancel</button>
+        <button type="button" class="btn btn-success btn-lg" ng-click="acceptEntry()">Accept</button>
+
+       
+    </div>
+
+   <div id="entrydesc" class="pull-left"><textarea name="theentry" id="theentry" rows="5" cols="58"></textarea></div>
+      <div id="entryaction" class="pull-left"><textarea name="theaction" id="theaction" rows="5" cols="35"></textarea></div>
+      <div id="entrylic" class="pull-left"><input type="text" name="thelicense" id="thelicense"> </div>
+      <div id="entrycam" class="pull-left"><select id="thecamera" name="thecamera">
+        <option value="1">Choose Camera</option>
+      </select></div>
+
 
   </div>
+
+
 
 <div class="table-responsive" ng-show="sitedata">
   <form name='tablechecksform' id='tablechecksform'>

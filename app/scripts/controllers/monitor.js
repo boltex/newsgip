@@ -27,6 +27,8 @@ angular.module('newsgipApp')
             $scope.users=data;
           });
         */
+        $scope.entrymode = 0;
+
         var datasend = {} ;
         datasend.action= 'premonitor';
         $http({
@@ -163,6 +165,18 @@ angular.module('newsgipApp')
           columnConform();
         });
 
+        $scope.addEntry = function(){
+          $scope.entrymode = 1;
+        };
+        $scope.cancelEntry = function(){
+          $scope.entrymode = 0;
+        };
+        $scope.resetEntry = function(){
+          //
+        };
+        $scope.acceptEntry = function(){
+          //
+        };
 
 
       }]);
