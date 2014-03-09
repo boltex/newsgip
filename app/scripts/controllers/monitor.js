@@ -1,4 +1,5 @@
 /*global $:false */
+
 'use strict';
 
 function formatAMPM() {
@@ -170,6 +171,10 @@ angular.module('newsgipApp')
         };
         $scope.cancelEntry = function(){
           $scope.entrymode = 0;
+
+
+
+          $scope.$apply();
         };
         $scope.resetEntry = function(){
           //
@@ -179,4 +184,18 @@ angular.module('newsgipApp')
         };
 
 
-      }]);
+      }]).directive('ngConfirmClick', [
+    function(){
+      return {
+        link: function (scope, element, attr) {
+          var msg = attr.ngConfirmClick || 'Are you sure?';
+          var clickAction = attr.confirmedClick;
+          element.bind('click',function (event) {
+            if ( window.confirm(msg) ) {
+              scope.$eval(clickAction);
+            }
+          });
+        }
+      };
+    }
+  ]);

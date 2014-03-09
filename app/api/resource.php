@@ -43,7 +43,7 @@ if ( empty($errors)) {
 
         case "premonitor":
             // PREMONITOR, or if site: MONITOR
-            if ($_SESSION['managingsite']==0){
+            if ($_SESSION['managingsite']==0 or $_SESSION['managingsite'] =="none"){
                 premonitor($errors, $data);
             }else{
                 premonitor($errors, $data);
@@ -54,7 +54,7 @@ if ( empty($errors)) {
 
         case "selectsite":
             // SELECT SITE and MONITOR
-            if (empty($_POST['SiteIndex']))
+            if (empty($_POST['SiteIndex']) or $_POST['SiteIndex']==0 or $_POST['SiteIndex'] =="none")
                 quitMessage($errors,$data,'SiteIndex is required.');
             $_SESSION['managingsite'] =$_POST['SiteIndex'];
             $_SESSION['tablepastpage'] = 1; // back to page 1
@@ -64,8 +64,11 @@ if ( empty($errors)) {
 
         case "changepage":
             // CHANGE PAGE and MONITOR
+            if ($_SESSION['managingsite']==0 or $_SESSION['managingsite'] =="none")
+                quitMessage($errors,$data,'managingsite was not set');
+                     
                 if ( !isset($_POST['page']) ){
-                    die("Needs page ");
+                   quitMessage($errors,$data, 'Needs page');
                 }
                 if( $_POST['page']=="goto" ){
                     $_SESSION['tablepastpage'] =(  (int)$_POST['thegoto']  ) ;

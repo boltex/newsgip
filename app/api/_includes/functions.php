@@ -78,11 +78,6 @@ function monitor(&$errors, &$data){
 
 function pagenav(&$errors, &$data){
 	$currentsite = $_SESSION['managingsite'];	
-	if($currentsite==0 or $currentsite=="none"){
-		$_SESSION['tablelastpage'] = $data['tablelastpage']= 0;
-		$data['test'] = "currentsite is".$currentsite;
-		return;
-	}
 	$query   = "SELECT COUNT(EventIndex) AS numrows FROM EventTable WHERE EventSite='$currentsite'";
 	$result  = mysql_query($query) or die('Error, query pagenav failed');
 	$row     = mysql_fetch_array($result, MYSQL_ASSOC);
@@ -93,7 +88,24 @@ function pagenav(&$errors, &$data){
 	$data['tablepastpage'] = $_SESSION['tablepastpage'];
 }
 
-
+function cameras( &$errors, &$data){
+	$currentsite = $_SESSION['managingsite'];	
+    $cameraexists=mysql_query(
+      "SELECT CameraIndex, CameraName FROM CameraTable WHERE CameraSite='$currentsite' and enabled='1'"
+    );
+    $numofcameras = mysql_num_rows($cameraexists);         
+       if($numofcameras<1){
+       	$r = array(
+	        "CameraIndex" => "0",
+	        "CameraName" => "none"
+         );
+       }else{ 
+        while( $anentry= mysql_fetch_assoc($siteexists )   ){
+            $r[]=$anentry;
+        }
+    }
+    $data['cameras'] = $r;
+}
 
 ?>
 

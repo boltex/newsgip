@@ -8,7 +8,7 @@
     </div>
     <div id="currentsite" class="col-xs-12 col-sm-4 col-md-4" >
       <div class=" btn-group btn-block">
-        <button id="choosesite-btn" type="button" class="btn btn-primary btn-block dropdown-toggle" data-toggle="dropdown" >
+        <button id="choosesite-btn" type="button" class="btn btn-default btn-block dropdown-toggle" data-toggle="dropdown" >
           Site : {{currentsite}} <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
@@ -33,32 +33,52 @@
       </div>  
   </div>
 
-<div id="entry" class="row">
+<div id="entry" class="row" ng-show="sitedata">
   <div class="col-xs-12" ng-hide="entrymode">
     <button type="button" class="btn btn-primary btn-block" ng-click="addEntry()">New Entry</button>
   </div>
-  <div class="col-xs-12 "ng-show="entrymode">
+ 
+  <div class="col-xs-12" ng-show="entrymode">
+    <form class="form-inline" role="form" novalidate>
+      <div class="row">
 
-    <div class="btn-group-vertical pull-left" >
-      
-        <button type="button" class="btn btn-info btn-sm," ng-click="resetEntry()">Reset</button>
-        <button type="button" class="btn btn-primary btn-sm," ng-click="cancelEntry()">Cancel</button>
-        <button type="button" class="btn btn-success btn-lg" ng-click="acceptEntry()">Accept</button>
-
-       
-    </div>
-
-   <div id="entrydesc" class="pull-left"><textarea name="theentry" id="theentry" rows="5" cols="58"></textarea></div>
-      <div id="entryaction" class="pull-left"><textarea name="theaction" id="theaction" rows="5" cols="35"></textarea></div>
-      <div id="entrylic" class="pull-left"><input type="text" name="thelicense" id="thelicense"> </div>
-      <div id="entrycam" class="pull-left"><select id="thecamera" name="thecamera">
-        <option value="1">Choose Camera</option>
-      </select></div>
+        <div class="col-xs-12 col-sm-2">
+          <div class="btn-group-vertical btn-block">
+         
+            <button type="button" class="btn btn-primary btn-sm btn-block" confirmed-click="cancelEntry()" ng-confirm-click="Cancel this entry?">Cancel</button> 
+            <button type="button" class="btn btn-success btn-lg btn-block" ng-click="acceptEntry()">Accept</button> 
+          </div>
+        </div>
 
 
+        <div class="col-xs-6 col-sm-4">
+          <textarea placeholder="Event" name="theentry" id="theentry" rows="4" ng-model="valEvent" ></textarea>
+        </div>
+        <div class="col-xs-6 col-sm-4">
+          <textarea placeholder="Action Taken" name="theaction" id="theaction"rows="4" ng-model="valAction"></textarea>
+        </div>
+
+        <div class="col-xs-12 col-sm-2">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12">
+              <input placeholder="License" type="text" name="thelicense" id="thelicense" class="form-control" ng-model="valLicense">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <select id="thecamera" name="thecamera" class="form-control"><option value="1" >Choose Camera</option></select>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+    </form>
   </div>
 
 
+</div>
 
 <div class="table-responsive" ng-show="sitedata">
   <form name='tablechecksform' id='tablechecksform'>
