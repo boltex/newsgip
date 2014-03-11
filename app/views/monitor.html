@@ -22,7 +22,7 @@
 
   <div class="row" ng-show="sitedata">
       <div id="birdseye" class="col-xs-12 col-sm-6 col-md-6 text-center" >
-        <img id="birdseye-img" src="siteimages/{{sitedata.SiteMapUrl}}" alt="Bird's eye view" class="img-rounded sitemapimg" >
+        <img id="birdseye-img"  alt="Bird's eye view" class="img-rounded sitemapimg" >
       </div>
 
       <div id="procedures" class="col-xs-12 col-sm-6 col-md-6  hidden-xs">
@@ -66,7 +66,7 @@
           </div>
           <div class="row">
             <div class="col-xs-12">
-              <select id="thecamera" name="thecamera" class="form-control"><option value="1" >Choose Camera</option></select>
+              <select id="thecamera" name="thecamera" class="form-control" ng-model="valCamera" ng-options="c.CameraName for c in cameras"></select>
             </div>
           </div>
         </div>

@@ -51,6 +51,7 @@ angular.module('newsgipApp')
               $scope.loggedAsUser = data.user.username;
               $scope.isadmin = data.isadmin;
               $scope.rowsperpage = data.rowsperpage;
+              
 
               if (typeof data.tablepast === 'undefined') {
               // variable is undefined NO DATA
@@ -61,10 +62,12 @@ angular.module('newsgipApp')
                 $scope.currentsite=$scope.sitedata.SiteName;
                 $scope.tablepastpage = data.tablepastpage;
                 $scope.tablelastpage = data.tablelastpage;
-                $('#birdseye-img').load( columnConform );
-                //columnConform();
+                $scope.cameras = data.cameras;
+                $('#birdseye-img').attr('src','siteimages/'+$scope.sitedata.SiteMapUrl);
+                $('#birdseye-img').load( columnConform ); //on finish loading set other column height
+                
               }
-              //console.log(data);
+              
             }
 
             
@@ -91,6 +94,8 @@ angular.module('newsgipApp')
                   $scope.tablepast=data.tablepast;
                   $scope.tablepastpage = data.tablepastpage;
                   $scope.tablelastpage = data.tablelastpage;
+                  $scope.cameras = data.cameras;
+                  $('#birdseye-img').attr('src','siteimages/'+$scope.sitedata.SiteMapUrl);
                   //$scope.loggedAsUser = data.user;
                   //console.log(data);
                   //if (data.isadmin===1) { $scope.isAdmin=1; }
@@ -128,6 +133,7 @@ angular.module('newsgipApp')
                 $scope.tablepast=data.tablepast;
                 $scope.tablepastpage = data.tablepastpage;
                 $scope.tablelastpage = data.tablelastpage;
+                $scope.cameras = data.cameras;
               }
             }).error(function(data){
               console.log('Error man... :'+data);
@@ -151,6 +157,7 @@ angular.module('newsgipApp')
             $scope.tablepast=data.tablepast;
             $scope.tablepastpage = data.tablepastpage;
             $scope.tablelastpage = data.tablelastpage;
+            $scope.cameras = data.cameras;
           })
           .error(function(data){
             console.log('Error man... :'+data);

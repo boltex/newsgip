@@ -49,6 +49,7 @@ if ( empty($errors)) {
                 premonitor($errors, $data);
                 monitor($errors, $data);
                 pagenav($errors, $data);
+                cameras( $errors, $data);
             }
         	break;           
 
@@ -60,6 +61,7 @@ if ( empty($errors)) {
             $_SESSION['tablepastpage'] = 1; // back to page 1
             monitor($errors, $data);
             pagenav($errors, $data);
+            cameras( $errors, $data);
         	break;
 
         case "changepage":
@@ -96,6 +98,7 @@ if ( empty($errors)) {
                 }
                 monitor($errors, $data);
                 pagenav($errors, $data);
+                cameras( $errors, $data);
    
             break;     
 
@@ -118,6 +121,8 @@ if ( empty($errors)) {
             $_SESSION['rowsperpage'] = $data['rowsperpage'] = $_POST['rowsperpage'];
             monitor($errors, $data);
             pagenav($errors, $data);
+            cameras( $errors, $data);
+
             break;        
 
         default:
