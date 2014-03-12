@@ -179,6 +179,14 @@ angular.module('newsgipApp')
         $scope.cancelEntry = function(){
           $scope.entrymode = 0;
 
+          $scope.valEvent = '';
+          $scope.valAction = '';
+          $scope.valLicense = '';
+          $scope.valCamera = '';
+
+
+
+
 
 
           $scope.$apply();

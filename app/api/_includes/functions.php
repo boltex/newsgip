@@ -100,7 +100,7 @@ function cameras( &$errors, &$data){
 	        "CameraName" => "none"
          );
        }else{ 
-        while( $anentry= mysql_fetch_assoc($siteexists )   ){
+        while( $anentry= mysql_fetch_assoc($cameraexists )   ){
             $r[]=$anentry;
         }
     }
