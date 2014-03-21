@@ -103,7 +103,7 @@ if ( empty($errors)) {
             break;     
 
         case "addentry":
-            if( !isset($_POST['theentry']) || !isset($_POST['ts_started']) || !isset($_POST['theaction']) || !isset($_POST['thelicense']) || !isset($_POST['thecamera']) || $_SESSION['islogged']!="1"){
+            if( !isset($_POST['theentry']) || !isset($_POST['tsstarted']) || !isset($_POST['theaction']) || !isset($_POST['thelicense']) || !isset($_POST['thecamera']) || $_SESSION['islogged']!="1"){
                 quitMessage($errors,$data, 'You need cookies enabled');
             }
 
@@ -111,21 +111,21 @@ if ( empty($errors)) {
              $entryaction =  $_POST['theaction'];
              $entrylicense =  $_POST['thelicense'];
              $entrycamera =  $_POST['thecamera'];
-             $ts_started = $_POST['ts_started'];
+             $tsstarted = $_POST['tsstarted'];
              if(get_magic_quotes_gpc())
               {
                 $entrydesc =   stripslashes($entrydesc);
                 $entryaction = stripslashes($entryaction);
                 $entrylicense =stripslashes($entrylicense); // text 
                 $entrycamera = stripslashes($entrycamera); // number
-                $ts_started = stripslashes($ts_started); 
+                $tsstarted = stripslashes($tsstarted); 
               }
 
             $entrydesc =   mysql_real_escape_string( $entrydesc );
             $entryaction = mysql_real_escape_string( $entryaction );
             $entrylicense = mysql_real_escape_string(  $entrylicense );
             $entrycamera = mysql_real_escape_string(  $entrycamera );
-            $ts_started = mysql_real_escape_string(  $ts_started );
+            $tsstarted = mysql_real_escape_string(  $tsstarted );
 
             // create entry
             //$querydesc = "INSERT INTO DescTable ( `Desc` ) ";
@@ -167,7 +167,7 @@ if ( empty($errors)) {
             $entryoperator= $_SESSION["userindex"];
 
             $queryaction = "INSERT INTO `sgipuser`.`EventTable` (`EventIndex`,`EventSite`, `EventDescription`, `EventAction`, `EventLicense`, `EventCamera`, `EventOperator`, `EventStart`) ";
-            $queryaction .= " VALUES (NULL, '$entrysite','$mysql_descid','$mysql_actionid', '$entrylicense' ,'$entrycamera' ,'$entryoperator' , FROM_UNIXTIME('$ts_started')   )";
+            $queryaction .= " VALUES (NULL, '$entrysite','$mysql_descid','$mysql_actionid', '$entrylicense' ,'$entrycamera' ,'$entryoperator' , FROM_UNIXTIME('$tsstarted')   )";
 
             mysql_query("LOCK TABLES EventTable WRITE");
             mysql_query("SET AUTOCOMMIT = 0");
@@ -183,28 +183,7 @@ if ( empty($errors)) {
             }
             // TEST FOR DATE TO
             if( !isset($_POST['thestarttime']) || !isset($_POST['theendtime']) ){
-                    session_destroy();
-                    header("Status: 200");
-                    header("Location: ./?lastmessage=You need cookies enabled");
-                    exit();
-            }
-
-            try{
-                $dblink = @mysql_connect("localhost", $db_user, $db_password ) ;
-                if (!$dblink) {
-                    $_SESSION = array(); 
-                    session_destroy();
-                    header("Status: 200");
-                    header("Location: ./?lastmessage=Error mysql_connect");
-                    exit();
-                }
-                mysql_select_db($db_database,$dblink); // same name : sgipuser
-            } catch(Exception $e) {
-                $_SESSION = array(); 
-                session_destroy();
-                header("Status: 200");
-                header("Location: ./?lastmessage=Error mysql_select_db");
-                exit();
+                    quitMessage($errors,$data, 'You need cookies enabled');
             }
              $entrydesc =  $_POST['theentry'];
              $entryaction =  $_POST['theaction'];
@@ -219,7 +198,7 @@ if ( empty($errors)) {
                 $entryaction = stripslashes($entryaction);
                 $entrylicense =stripslashes($entrylicense); // text 
                 $entrycamera = stripslashes($entrycamera); // number
-                $ts_started = stripslashes($ts_started); 
+                $starttime = stripslashes($starttime); 
               }
 
             $entrydesc =   mysql_real_escape_string( $entrydesc );
@@ -230,22 +209,15 @@ if ( empty($errors)) {
              $endtime = mysql_real_escape_string( $endtime) ;
             // todo CHECK VALID DATE 
              if ( ($timestamp = strtotime($starttime)) === false) {
-               mysql_close($dblink);
-               header("Status: 200");
-               header("Location: monitoring.php?message=bad date format");
-               exit();
+               quitMessage($errors,$data, 'bad date format');
              }else{
                 // good 
              }
              if ( ($timestamp = strtotime($endtime)) === false) {
-               mysql_close($dblink);
-               header("Status: 200");
-               header("Location: monitoring.php?message=bad date format");
-               exit();
+               quitMessage($errors,$data, 'bad date format');
              }else{
                 // good 
              } 
-
             // get existing desc and action data
             $entryindex = $_POST['entryindex'] ;
              $eventexists=mysql_query    (  "SELECT EventDescription, EventAction FROM EventTable WHERE EventIndex='$entryindex'");
