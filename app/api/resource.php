@@ -163,7 +163,7 @@ if ( empty($errors)) {
 
             //echo $mysql_actionid;
 
-            $entrysite=$_SESSION["currentsite"];
+            $entrysite=$_SESSION['managingsite'];
             $entryoperator= $_SESSION["userindex"];
 
             $queryaction = "INSERT INTO `sgipuser`.`EventTable` (`EventIndex`,`EventSite`, `EventDescription`, `EventAction`, `EventLicense`, `EventCamera`, `EventOperator`, `EventStart`) ";

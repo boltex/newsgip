@@ -28,7 +28,7 @@ angular.module('newsgipApp')
             $scope.users=data;
           });
         */
-       
+        var temptime = new Date();
         $scope.tsStarted = 0; // placeholder for started entry timestamp
         $scope.entrymode = 0;
 
@@ -177,7 +177,7 @@ angular.module('newsgipApp')
 
         $scope.addEntry = function(){
           $scope.entrymode = 1;
-          $scope.tsStarted = Date().getTime();
+          $scope.tsStarted = temptime.getTime();
         };
         $scope.cancelEntry = function(){
           $scope.entrymode = 0;
@@ -205,7 +205,9 @@ angular.module('newsgipApp')
           datasend.tsstarted= $scope.tsStarted;
           datasend.theaction= $scope.valAction ;
           datasend.thelicense=$scope.valLicense ;
-          datasend.thecamera=$scope.valCamera ;
+          datasend.thecamera=$scope.valCamera.CameraIndex ;
+          console.log(datasend);
+          
           $http({
               method: 'POST',
               url: 'api/resource.php',
@@ -215,6 +217,7 @@ angular.module('newsgipApp')
           .success(function(data){
               if (!data.success) {}
             });
+
         };
 
 
