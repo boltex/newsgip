@@ -198,7 +198,6 @@ angular.module('newsgipApp')
           //
         };
         $scope.acceptEntry = function(){
-          // theentry ts_started theaction thelicense thecamera
           var datasend = {} ;
           datasend.action= 'addentry';
           datasend.theentry= $scope.valEvent;
@@ -206,8 +205,6 @@ angular.module('newsgipApp')
           datasend.theaction= $scope.valAction ;
           datasend.thelicense=$scope.valLicense ;
           datasend.thecamera=$scope.valCamera.CameraIndex ;
-          console.log(datasend);
-          
           $http({
               method: 'POST',
               url: 'api/resource.php',
@@ -215,7 +212,17 @@ angular.module('newsgipApp')
               headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
           .success(function(data){
-              if (!data.success) {}
+              //console.log(data);
+              if (!data.success) {
+                // Responded ERROR
+                $scope.message = data.errors;
+              
+              } else {
+                // SUCCESS !!
+                
+              }
+            }).error(function(data){
+              console.log('Error :'+data);
             });
 
         };
